@@ -7,18 +7,24 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>520</height>
+    <height>518</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Qyoutube-dl</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>310</y>
+      <y>10</y>
       <width>311</width>
       <height>21</height>
      </rect>
@@ -28,8 +34,8 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>310</y>
-      <width>75</width>
+      <y>10</y>
+      <width>71</width>
       <height>23</height>
      </rect>
     </property>
@@ -41,7 +47,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
+      <y>10</y>
       <width>161</width>
       <height>21</height>
      </rect>
@@ -54,7 +60,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>40</y>
       <width>551</width>
       <height>291</height>
      </rect>
@@ -125,7 +131,7 @@
     </property>
     <column>
      <property name="text">
-      <string>Checked</string>
+      <string> </string>
      </property>
     </column>
     <column>
@@ -149,11 +155,11 @@
      </property>
     </column>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="consoleOutput">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>370</y>
+      <y>340</y>
       <width>551</width>
       <height>111</height>
      </rect>
@@ -222,11 +228,8 @@
       </disabled>
      </palette>
     </property>
-    <property name="font">
-     <font>
-      <family>MS Sans Serif</family>
-      <pointsize>9</pointsize>
-     </font>
+    <property name="documentTitle">
+     <string>Output</string>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -234,13 +237,16 @@
     <property name="plainText">
      <string/>
     </property>
+    <property name="placeholderText">
+     <string>output...</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>340</y>
-      <width>141</width>
+      <y>460</y>
+      <width>131</width>
       <height>23</height>
      </rect>
     </property>
