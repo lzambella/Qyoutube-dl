@@ -1,2 +1,2 @@
 # Qyoutube-dl
-A Qt GUI front-end for youtube-dl
+A Qt GUI front-end for youtube-dl. Currently doesn't do anything...
