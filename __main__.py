@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """__main__.py: Main execution program"""
-from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QMessageBox, QWidget
+from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication
 from MainWindow import Ui_MainWindow
 from about import Ui_About
+from PyQt5 import QtCore
 import sys
 
 __author__ = "Luke Zambella"
@@ -14,16 +15,14 @@ class Qyoutube_dl(QMainWindow):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        #self.ui.actionAbout.triggered.connect(AboutWindow.__init__)
+        self.ui.actionAbout.triggered.connect(self.on_actionAbout_clicked)
 
-
-class AboutWindow(QDialog):
-        def __init__(self):
-            super(AboutWindow, self).__init__()
-            self.about_dialog = Ui_About()
-            self.about_dialog.setupUi(self)
-            self.exec_()
-
+    def on_actionAbout_clicked(self):
+        dialog = QDialog()
+        dialog.ui = Ui_About()
+        dialog.ui.setupUi(dialog)
+        dialog.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        dialog.exec_()
 
 # Main entry point
 if __name__ == "__main__":
