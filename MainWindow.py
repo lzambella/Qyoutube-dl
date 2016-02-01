@@ -107,8 +107,11 @@ class Ui_MainWindow(object):
         self.actionQuit.setObjectName("actionQuit")
         self.actionSettings = QtWidgets.QAction(MainWindow)
         self.actionSettings.setObjectName("actionSettings")
+        self.actionAbout = QtWidgets.QAction(MainWindow)
+        self.actionAbout.setObjectName("actionAbout")
         self.menuFile.addAction(self.actionSettings)
         self.menuFile.addAction(self.actionQuit)
+        self.menuHelp.addAction(self.actionAbout)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
@@ -119,10 +122,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Qyoutube-dl"))
-        self.pushButton.setText(_translate("MainWindow", "OK"))
+        self.pushButton.setText(_translate("MainWindow", "Add"))
         self.label.setText(_translate("MainWindow", "Enter channel URL or video URL:"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", " "))
+        item.setText(_translate("MainWindow", "#"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "URL"))
         item = self.tableWidget.horizontalHeaderItem(2)
@@ -138,4 +141,5 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
         self.actionSettings.setText(_translate("MainWindow", "Settings"))
+        self.actionAbout.setText(_translate("MainWindow", "About"))
 
