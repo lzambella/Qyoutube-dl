@@ -8,7 +8,7 @@ import sys
 
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
-
+__version__ = "0.1"
 
 class Qyoutube_dl(QMainWindow):
     def __init__(self):
