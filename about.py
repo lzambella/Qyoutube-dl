@@ -12,6 +12,8 @@ class Ui_About(object):
     def setupUi(self, About):
         About.setObjectName("About")
         About.resize(401, 117)
+        About.setMinimumSize(QtCore.QSize(401, 117))
+        About.setMaximumSize(QtCore.QSize(401, 117))
         self.buttonBox = QtWidgets.QDialogButtonBox(About)
         self.buttonBox.setGeometry(QtCore.QRect(10, 80, 381, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
