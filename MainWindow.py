@@ -122,10 +122,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Qyoutube-dl"))
-        self.pushButton.setText(_translate("MainWindow", "Add"))
+        self.pushButton.setText(_translate("MainWindow", "OK"))
         self.label.setText(_translate("MainWindow", "Enter channel URL or video URL:"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "#"))
+        item.setText(_translate("MainWindow", " "))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "URL"))
         item = self.tableWidget.horizontalHeaderItem(2)
