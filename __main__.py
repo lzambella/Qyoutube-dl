@@ -39,7 +39,7 @@ class Qyoutube_dl(QMainWindow):
         # Check if URL is valid (I know youtube-dl supports different website)
         if key_file.__sizeof__() > 0:
             api_key = key_file.readLine()
-        if 'youtube.com' in url:
+        if 'youtube.com' in url and 'watch' in url:
             next_row = self.ui.tableWidget.rowCount()
             self.ui.tableWidget.insertRow(next_row)
             # Fill the row
@@ -52,6 +52,10 @@ class Qyoutube_dl(QMainWindow):
         else:
             self.ui.consoleOutput.setPlainText("Not a youtube link!")
 
+    def on_pushButton_2_pressed(self):
+        # TODO: this shouldn't work
+        for video in self.ui.tableWidget.columnAt(1):
+            youtube_dl.main(video)
 
 # Main entry point
 if __name__ == "__main__":
