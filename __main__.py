@@ -15,6 +15,7 @@ __version__ = "0.1"
 
 class Qyoutube_dl(QMainWindow):
     api_key = ""
+    video_downloader = youtube_dl.YoutubeDL()
 
     def __init__(self):
         super(Qyoutube_dl, self).__init__()
@@ -53,9 +54,7 @@ class Qyoutube_dl(QMainWindow):
             self.ui.consoleOutput.setPlainText("Not a youtube link!")
 
     def on_pushButton_2_pressed(self):
-        # TODO: this shouldn't work
-        for video in self.ui.tableWidget.columnAt(1):
-            youtube_dl.main(video)
+        foo = "bar"
 
 # Main entry point
 if __name__ == "__main__":
