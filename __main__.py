@@ -8,6 +8,8 @@ import sys
 import io
 from SettingsHandler import SettingsDialog
 import youtube_dl
+import youtube_dl.version
+
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
 __version__ = "0.1"
@@ -15,13 +17,15 @@ __version__ = "0.1"
 
 class Qyoutube_dl(QMainWindow):
     api_key = ""
-
+    string_buffer = ""
+    video_downloader = youtube_dl.YoutubeDL()
     def __init__(self):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        sys.stdout = self.ui.consoleOutput.appendPlainText("")
-        #youtube_dl.main(['--version'])
+        sys.stdout = self.string_buffer
+        self.ui.consoleOutput.appendPlainText("Software version: " + __version__ + '\n')
+        self.ui.consoleOutput.appendPlainText("Youtube-dl version: " + youtube_dl.version.__version__ + '\n')
 
     def on_actionAbout_triggered(self):
         dialog = QDialog()
@@ -52,7 +56,7 @@ class Qyoutube_dl(QMainWindow):
                 text = "placeholder"
 
         else:
-            self.ui.consoleOutput.setPlainText("Not a youtube link!")
+            self.ui.consoleOutput.appendPlainText("Not a youtube link!")
 # Main entry point
 if __name__ == "__main__":
     app = QApplication(sys.argv)
