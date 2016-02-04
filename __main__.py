@@ -3,7 +3,7 @@
 from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
 from MainWindow import Ui_MainWindow
 from about import Ui_About
-from PyQt5 import QtCore, uic
+from PyQt5 import QtCore
 import sys
 import io
 from SettingsHandler import SettingsDialog
@@ -15,12 +15,13 @@ __version__ = "0.1"
 
 class Qyoutube_dl(QMainWindow):
     api_key = ""
-    video_downloader = youtube_dl.YoutubeDL()
 
     def __init__(self):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        sys.stdout = self.ui.consoleOutput.appendPlainText("")
+        #youtube_dl.main(['--version'])
 
     def on_actionAbout_triggered(self):
         dialog = QDialog()
@@ -52,10 +53,6 @@ class Qyoutube_dl(QMainWindow):
 
         else:
             self.ui.consoleOutput.setPlainText("Not a youtube link!")
-
-    def on_pushButton_2_pressed(self):
-        foo = "bar"
-
 # Main entry point
 if __name__ == "__main__":
     app = QApplication(sys.argv)
