@@ -16,9 +16,9 @@ __version__ = "0.1"
 
 
 class Qyoutube_dl(QMainWindow):
-    api_key = ""
     string_buffer = ""
     video_downloader = youtube_dl.YoutubeDL()
+
     def __init__(self):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
@@ -41,22 +41,12 @@ class Qyoutube_dl(QMainWindow):
 
     def on_pushButton_pressed(self):
         url = self.ui.lineEdit.text()
-        key_file = open("key.txt")
-        # Check if URL is valid (I know youtube-dl supports different website)
-        if key_file.__sizeof__() > 0:
-            api_key = key_file.readLine()
-        if 'youtube.com' in url and 'watch' in url:
-            next_row = self.ui.tableWidget.rowCount()
-            self.ui.tableWidget.insertRow(next_row)
-            # Fill the row
-            self.ui.tableWidget.setItem(next_row, 1, QTableWidgetItem(url))  # Add URL
-            # If an api key exists
-            if len(api_key) > 0:
-                # TODO: add api calls
-                text = "placeholder"
+        next_row = self.ui.tableWidget.rowCount()
+        self.ui.tableWidget.insertRow(next_row)
+        # Fill the row
+        self.ui.tableWidget.setItem(next_row, 1, QTableWidgetItem(url))  # Add URL
 
-        else:
-            self.ui.consoleOutput.appendPlainText("Not a youtube link!")
+
 # Main entry point
 if __name__ == "__main__":
     app = QApplication(sys.argv)
