@@ -5,7 +5,6 @@ from MainWindow import Ui_MainWindow
 from about import Ui_About
 from PyQt5 import QtCore
 import sys
-import io
 from SettingsHandler import SettingsDialog
 import youtube_dl
 import youtube_dl.version
