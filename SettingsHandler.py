@@ -8,15 +8,15 @@ _author__ = 'Luke Zambella'
 
 class SettingsDialog(QDialog):
     string_buffer = ""
-    salt_mine = base64.b64decode("CxFghrnJf4957Ngj568fLkIHJpg(i4,Kamgoaio")
+    salt_mine = base64.b64decode("zsdfrhjk")
     def __init__(self):
         super(SettingsDialog, self).__init__()
         self.ui = Ui_SettingDialog()
         self.ui.setupUi(self)
-        self.file_io = open("settings.txt", 'w')
 
-    # confirm settings
-    def on_okButton_pressed(self):
+    # TODO: This doesn't work and it closes the whole program.
+    def on_buttonBox_accepted(self):
+        file_io = open("settings.txt", 'w')
         if self.ui.quietCheckBox.isChecked():
             self.string_buffer += "QUIET_MODE\n"
         if self.ui.verboseCheckBox.isChecked() and not self.ui.quietCheckBox.isChecked():
@@ -47,15 +47,36 @@ class SettingsDialog(QDialog):
             self.string_buffer += "FORCE_PRINT_DURATION\n"
         if self.ui.forcejson.isChecked():
             self.stringBuffer += "FORCE_PRINT_JSON\n"
-        try:
-            if len(self.ui.age_limit.text()) > 0:
-                self.stringBuffer += "AGE_LIMIT:" + int(self.ui.age_limit.text()) + "\n"
-        except:
-            print("not an int")
-        self.file_io.write(self.string_buffer)
-        self.file_io.close()
-        self.close()
 
+        buffer = self.ui.age_limit.text()
+        try:
+            if len(buffer) > 0:
+                self.string_buffer += "AGE_LIMIT:" + int(self.ui.age_limit.text()) + "\n"
+        except:
+            print("age_limit type not int")
+        buffer = self.ui.min_views.text()
+        try:
+            if len(buffer) > 0:
+                self.string_buffer += "MIN_VIEWS:" + int(self.ui.min_views.text()) + "\n"
+        except:
+            print("min_views type not int")
+        buffer = self.ui.max_views.text()
+        try:
+            if len(buffer) > 0:
+                self.string_buffer += "MAX_VIEWS:" + int(self.ui.max_views.text()) + "\n"
+        except:
+            print("max_views type not int")
+        buffer = self.ui.record_file.text()
+        if len(buffer) > 0:
+            self.string_buffer += "FILE_PATH:" + self.ui.record_file.text() + "\n"
+        file_io.write(self.string_buffer)
+        file_io.close()
+        self.hide()
+
+    def on_select_record_file_button_pressed(self):
+        dialog = QFileDialog()
+        dialog.__init__()
+        self.ui.record_file.setText((QFileDialog.getExistingDirectory(dialog, "Select Directory")))
 
 '''
     def on_selectDirButton_pressed(self):

@@ -51,6 +51,7 @@ class Ui_SettingDialog(object):
         self.label_2.setObjectName("label_2")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_2)
         self.lineEdit_2.setGeometry(QtCore.QRect(70, 50, 341, 20))
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
@@ -123,7 +124,7 @@ class Ui_SettingDialog(object):
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(SettingDialog)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         self.quietCheckBox.toggled['bool'].connect(self.verboseCheckBox.setDisabled)
         self.quietCheckBox.toggled['bool'].connect(self.warningsCheckBox.setDisabled)
         self.buttonBox.rejected.connect(SettingDialog.close)
