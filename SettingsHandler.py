@@ -30,7 +30,8 @@ class SettingsDialog(QDialog):
         if len(self.ui.lineEdit.text()) > 0:
             self.string_buffer += "USERNAME:" + self.ui.lineEdit.text() + "\n"
         if len(self.ui.lineEdit_2.text()) > 0:
-            self.string_buffer += "PASSWORD:" + base64.b64encode(self.ui.lineEdit_2.text()) + self.salt_mine + "\n"
+            buffer = self.ui.lineEdit_2.text()
+            self.string_buffer += "PASSWORD:" + base64.b64encode(buffer) + "\n"
         if self.ui.forceurl.isChecked():
             self.string_buffer += "FORCE_PRINT_URL\n"
         if self.ui.forcetitle.isChecked():
@@ -51,24 +52,24 @@ class SettingsDialog(QDialog):
         buffer = self.ui.age_limit.text()
         try:
             if len(buffer) > 0:
-                self.string_buffer += "AGE_LIMIT:" + int(self.ui.age_limit.text()) + "\n"
+                self.string_buffer += "AGE_LIMIT:" + int(buffer) + "\n"
         except:
             print("age_limit type not int")
         buffer = self.ui.min_views.text()
         try:
             if len(buffer) > 0:
-                self.string_buffer += "MIN_VIEWS:" + int(self.ui.min_views.text()) + "\n"
+                self.string_buffer += "MIN_VIEWS:" + int(buffer) + "\n"
         except:
             print("min_views type not int")
         buffer = self.ui.max_views.text()
         try:
             if len(buffer) > 0:
-                self.string_buffer += "MAX_VIEWS:" + int(self.ui.max_views.text()) + "\n"
+                self.string_buffer += "MAX_VIEWS:" + int(buffer) + "\n"
         except:
             print("max_views type not int")
         buffer = self.ui.record_file.text()
         if len(buffer) > 0:
-            self.string_buffer += "FILE_PATH:" + self.ui.record_file.text() + "\n"
+            self.string_buffer += "FILE_PATH:" + buffer + "\n"
         file_io.write(self.string_buffer)
         file_io.close()
         self.hide()
