@@ -13,8 +13,9 @@ class SettingsDialog(QDialog):
         super(SettingsDialog, self).__init__()
         self.ui = Ui_SettingDialog()
         self.ui.setupUi(self)
+        # self.show()
 
-    # TODO: This doesn't work and it closes the whole program.
+    @QtCore.pyqtSlot()
     def on_buttonBox_accepted(self):
         file_io = open("settings.txt", 'w')
         if self.ui.quietCheckBox.isChecked():
@@ -27,11 +28,13 @@ class SettingsDialog(QDialog):
             self.string_buffer += "IGNORE_WARNINGS\n"
         if self.ui.overwriteCheckBox.isChecked():
             self.string_buffer += "PREVENT_FILE_OVERWRITE\n"
+            """
         if len(self.ui.lineEdit.text()) > 0:
             self.string_buffer += "USERNAME:" + self.ui.lineEdit.text() + "\n"
         if len(self.ui.lineEdit_2.text()) > 0:
-            buffer = self.ui.lineEdit_2.text()
-            self.string_buffer += "PASSWORD:" + base64.b64encode(buffer) + "\n"
+            buffer = base64.b64encode(self.ui.lineEdit_2.text().encode())
+            self.string_buffer += "PASSWORD:" + str(buffer) + "\n"
+            """
         if self.ui.forceurl.isChecked():
             self.string_buffer += "FORCE_PRINT_URL\n"
         if self.ui.forcetitle.isChecked():
@@ -52,19 +55,19 @@ class SettingsDialog(QDialog):
         buffer = self.ui.age_limit.text()
         try:
             if len(buffer) > 0:
-                self.string_buffer += "AGE_LIMIT:" + int(buffer) + "\n"
+                self.string_buffer += "AGE_LIMIT:" + buffer + "\n"
         except:
             print("age_limit type not int")
         buffer = self.ui.min_views.text()
         try:
             if len(buffer) > 0:
-                self.string_buffer += "MIN_VIEWS:" + int(buffer) + "\n"
+                self.string_buffer += "MIN_VIEWS:" + buffer + "\n"
         except:
             print("min_views type not int")
         buffer = self.ui.max_views.text()
         try:
             if len(buffer) > 0:
-                self.string_buffer += "MAX_VIEWS:" + int(buffer) + "\n"
+                self.string_buffer += "MAX_VIEWS:" + buffer + "\n"
         except:
             print("max_views type not int")
         buffer = self.ui.record_file.text()
@@ -72,13 +75,12 @@ class SettingsDialog(QDialog):
             self.string_buffer += "FILE_PATH:" + buffer + "\n"
         file_io.write(self.string_buffer)
         file_io.close()
-        self.hide()
+        self.close()
 
     def on_select_record_file_button_pressed(self):
         dialog = QFileDialog()
         dialog.__init__()
         self.ui.record_file.setText((QFileDialog.getExistingDirectory(dialog, "Select Directory")))
-
 '''
     def on_selectDirButton_pressed(self):
         file_dialog = QDirModel

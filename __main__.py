@@ -26,6 +26,7 @@ class Qyoutube_dl(QMainWindow):
         self.ui.consoleOutput.appendPlainText("Software version: " + __version__ + '\n')
         self.ui.consoleOutput.appendPlainText("Youtube-dl version: " + youtube_dl.version.__version__ + '\n')
 
+    @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
         dialog = QDialog()
         dialog.ui = Ui_About()
@@ -33,11 +34,13 @@ class Qyoutube_dl(QMainWindow):
         dialog.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         dialog.exec_()
 
+    @QtCore.pyqtSlot()
     def on_actionSettings_triggered(self):
         dialog = SettingsDialog()
         dialog.__init__()
         dialog.exec_()
 
+    @QtCore.pyqtSlot()
     def on_pushButton_pressed(self):
         url = self.ui.lineEdit.text()
         next_row = self.ui.tableWidget.rowCount()
