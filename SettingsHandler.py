@@ -9,11 +9,12 @@ _author__ = 'Luke Zambella'
 class SettingsDialog(QDialog):
     string_buffer = ""
     salt_mine = base64.b64decode("zsdfrhjk")
+
     def __init__(self):
         super(SettingsDialog, self).__init__()
         self.ui = Ui_SettingDialog()
         self.ui.setupUi(self)
-        # self.show()
+        self.loadSettings()  # Load saved settings
 
     @QtCore.pyqtSlot()
     def on_buttonBox_accepted(self):
@@ -76,6 +77,24 @@ class SettingsDialog(QDialog):
         file_io.write(self.string_buffer)
         file_io.close()
         self.close()
+
+    def loadSettings(self):
+        settings_reader = open("settings.txt", 'r')
+        while True:
+            line = settings_reader.readline()
+            if line == "":
+                break
+            if line == "QUIET_MODE":
+                self.ui.quietCheckBox.setChecked(True)
+            if line == "VERBOSE_MODE" and not self.ui.quietCheckBox.isChecked():
+                self.ui.verboseCheckBox.setChecked(True)
+            if line == "NO_WARNINGS" and not self.ui.quietCheckBox.isChecked():
+                self.ui.warningsCheckBox.setChecked(True)
+            if line == "IGNORE_WARNINGS" and not self.ui.quietCheckBox.isChecked():
+                self.ui.ignoreCheckBox.setChecked(True)
+            
+
+
 
     def on_select_record_file_button_pressed(self):
         dialog = QFileDialog()

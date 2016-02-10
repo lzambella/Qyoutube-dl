@@ -35,7 +35,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -140,9 +140,9 @@
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>100</x>
        <y>20</y>
-       <width>341</width>
+       <width>311</width>
        <height>20</height>
       </rect>
      </property>
@@ -163,9 +163,9 @@
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>100</x>
        <y>50</y>
-       <width>341</width>
+       <width>311</width>
        <height>20</height>
       </rect>
      </property>
@@ -326,7 +326,7 @@
      <widget class="QLineEdit" name="age_limit">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>120</x>
         <y>20</y>
         <width>71</width>
         <height>20</height>
@@ -352,7 +352,7 @@
      <widget class="QLineEdit" name="min_views">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>120</x>
         <y>50</y>
         <width>71</width>
         <height>20</height>
@@ -378,7 +378,7 @@
      <widget class="QLineEdit" name="max_views">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>120</x>
         <y>80</y>
         <width>71</width>
         <height>20</height>
@@ -404,7 +404,7 @@
      <widget class="QLineEdit" name="record_file">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>120</x>
         <y>110</y>
         <width>71</width>
         <height>20</height>
@@ -414,7 +414,7 @@
      <widget class="QPushButton" name="select_record_file_button">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>200</x>
         <y>110</y>
         <width>31</width>
         <height>21</height>

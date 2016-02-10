@@ -2,7 +2,8 @@
 
 # Form implementation generated from reading ui file 'settings.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created: Wed Feb 10 12:21:15 2016
+#      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -44,13 +45,13 @@ class Ui_SettingDialog(object):
         self.label.setGeometry(QtCore.QRect(10, 20, 401, 21))
         self.label.setObjectName("label")
         self.lineEdit = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit.setGeometry(QtCore.QRect(70, 20, 341, 20))
+        self.lineEdit.setGeometry(QtCore.QRect(100, 20, 311, 20))
         self.lineEdit.setObjectName("lineEdit")
         self.label_2 = QtWidgets.QLabel(self.tab_2)
         self.label_2.setGeometry(QtCore.QRect(10, 50, 401, 21))
         self.label_2.setObjectName("label_2")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit_2.setGeometry(QtCore.QRect(70, 50, 341, 20))
+        self.lineEdit_2.setGeometry(QtCore.QRect(100, 50, 311, 20))
         self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.tabWidget.addTab(self.tab_2, "")
@@ -91,31 +92,31 @@ class Ui_SettingDialog(object):
         self.label_3.setToolTip("")
         self.label_3.setObjectName("label_3")
         self.age_limit = QtWidgets.QLineEdit(self.groupBox_3)
-        self.age_limit.setGeometry(QtCore.QRect(100, 20, 71, 20))
+        self.age_limit.setGeometry(QtCore.QRect(120, 20, 71, 20))
         self.age_limit.setObjectName("age_limit")
         self.label_4 = QtWidgets.QLabel(self.groupBox_3)
         self.label_4.setGeometry(QtCore.QRect(10, 50, 371, 21))
         self.label_4.setToolTip("")
         self.label_4.setObjectName("label_4")
         self.min_views = QtWidgets.QLineEdit(self.groupBox_3)
-        self.min_views.setGeometry(QtCore.QRect(100, 50, 71, 20))
+        self.min_views.setGeometry(QtCore.QRect(120, 50, 71, 20))
         self.min_views.setObjectName("min_views")
         self.label_5 = QtWidgets.QLabel(self.groupBox_3)
         self.label_5.setGeometry(QtCore.QRect(10, 80, 371, 21))
         self.label_5.setToolTip("")
         self.label_5.setObjectName("label_5")
         self.max_views = QtWidgets.QLineEdit(self.groupBox_3)
-        self.max_views.setGeometry(QtCore.QRect(100, 80, 71, 20))
+        self.max_views.setGeometry(QtCore.QRect(120, 80, 71, 20))
         self.max_views.setObjectName("max_views")
         self.label_6 = QtWidgets.QLabel(self.groupBox_3)
         self.label_6.setGeometry(QtCore.QRect(10, 110, 371, 21))
         self.label_6.setToolTip("")
         self.label_6.setObjectName("label_6")
         self.record_file = QtWidgets.QLineEdit(self.groupBox_3)
-        self.record_file.setGeometry(QtCore.QRect(100, 110, 71, 20))
+        self.record_file.setGeometry(QtCore.QRect(120, 110, 71, 20))
         self.record_file.setObjectName("record_file")
         self.select_record_file_button = QtWidgets.QPushButton(self.groupBox_3)
-        self.select_record_file_button.setGeometry(QtCore.QRect(180, 110, 31, 21))
+        self.select_record_file_button.setGeometry(QtCore.QRect(200, 110, 31, 21))
         self.select_record_file_button.setObjectName("select_record_file_button")
         self.tabWidget.addTab(self.tab_3, "")
         self.buttonBox = QtWidgets.QDialogButtonBox(SettingDialog)
@@ -124,7 +125,7 @@ class Ui_SettingDialog(object):
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(SettingDialog)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.quietCheckBox.toggled['bool'].connect(self.verboseCheckBox.setDisabled)
         self.quietCheckBox.toggled['bool'].connect(self.warningsCheckBox.setDisabled)
         self.buttonBox.rejected.connect(SettingDialog.close)
