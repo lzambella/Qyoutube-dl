@@ -1,7 +1,10 @@
+import base64
+
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QDialog, QFileDialog
-from SettingsWindow import Ui_SettingDialog
-import base64
+
+from Compiled_UI.SettingsWindow import Ui_SettingDialog
+
 _author__ = 'Luke Zambella'
 
 

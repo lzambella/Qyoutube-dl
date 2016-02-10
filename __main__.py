@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 """__main__.py: Main execution program"""
-from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
-from MainWindow import Ui_MainWindow
-from about import Ui_About
-from PyQt5 import QtCore
 import sys
-from SettingsHandler import SettingsDialog
+
+from PyQt5 import QtCore
+from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
+
 import youtube_dl
 import youtube_dl.version
+from Compiled_UI.MainWindow import Ui_MainWindow
+from Compiled_UI.about import Ui_About
+from Controllers.SettingsController import SettingsDialog
 
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
