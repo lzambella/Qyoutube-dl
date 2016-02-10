@@ -1,7 +1,6 @@
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QDialog, QFileDialog, QDirModel
+from PyQt5.QtWidgets import QDialog, QFileDialog
 from SettingsWindow import Ui_SettingDialog
-import hashlib
 import base64
 _author__ = 'Luke Zambella'
 
@@ -14,7 +13,7 @@ class SettingsDialog(QDialog):
         super(SettingsDialog, self).__init__()
         self.ui = Ui_SettingDialog()
         self.ui.setupUi(self)
-        self.loadSettings()  # Load saved settings
+        self.load_settings()  # Load saved settings
 
     @QtCore.pyqtSlot()
     def on_buttonBox_accepted(self):
@@ -26,7 +25,7 @@ class SettingsDialog(QDialog):
         if self.ui.warningsCheckBox.isChecked() and not self.ui.quietCheckBox.isChecked():
             self.string_buffer += "NO_WARNINGS\n"
         if self.ui.ignoreCheckBox.isChecked() and not self.ui.quietCheckBox.isChecked():
-            self.string_buffer += "IGNORE_WARNINGS\n"
+            self.string_buffer += "IGNORE_ERRORS\n"
         if self.ui.overwriteCheckBox.isChecked():
             self.string_buffer += "PREVENT_FILE_OVERWRITE\n"
             """
@@ -51,58 +50,65 @@ class SettingsDialog(QDialog):
         if self.ui.forceduration.isChecked():
             self.string_buffer += "FORCE_PRINT_DURATION\n"
         if self.ui.forcejson.isChecked():
-            self.stringBuffer += "FORCE_PRINT_JSON\n"
-
+            self.string_buffer += "FORCE_PRINT_JSON\n"
         buffer = self.ui.age_limit.text()
-        try:
-            if len(buffer) > 0:
-                self.string_buffer += "AGE_LIMIT:" + buffer + "\n"
-        except:
-            print("age_limit type not int")
+        if len(buffer) > 0:
+            self.string_buffer += "AGE_LIMIT:" + buffer + "\n"
         buffer = self.ui.min_views.text()
-        try:
-            if len(buffer) > 0:
-                self.string_buffer += "MIN_VIEWS:" + buffer + "\n"
-        except:
-            print("min_views type not int")
+        if len(buffer) > 0:
+            self.string_buffer += "MIN_VIEWS:" + buffer + "\n"
         buffer = self.ui.max_views.text()
-        try:
-            if len(buffer) > 0:
-                self.string_buffer += "MAX_VIEWS:" + buffer + "\n"
-        except:
-            print("max_views type not int")
+        if len(buffer) > 0:
+            self.string_buffer += "MAX_VIEWS:" + buffer + "\n"
         buffer = self.ui.record_file.text()
         if len(buffer) > 0:
-            self.string_buffer += "FILE_PATH:" + buffer + "\n"
+            self.string_buffer += "FILE_PATH::" + buffer + "\n"
         file_io.write(self.string_buffer)
         file_io.close()
         self.close()
 
-    def loadSettings(self):
+    def load_settings(self):
         settings_reader = open("settings.txt", 'r')
         while True:
             line = settings_reader.readline()
-            if line == "":
+            if line is "":
                 break
-            if line == "QUIET_MODE":
+            elif "QUIET_MODE" in line:
                 self.ui.quietCheckBox.setChecked(True)
-            if line == "VERBOSE_MODE" and not self.ui.quietCheckBox.isChecked():
+            elif "VERBOSE_MODE" in line and not self.ui.quietCheckBox.isChecked():
                 self.ui.verboseCheckBox.setChecked(True)
-            if line == "NO_WARNINGS" and not self.ui.quietCheckBox.isChecked():
+            elif "NO_WARNINGS" in line and not self.ui.quietCheckBox.isChecked():
                 self.ui.warningsCheckBox.setChecked(True)
-            if line == "IGNORE_WARNINGS" and not self.ui.quietCheckBox.isChecked():
+            elif "IGNORE_ERRORS" in line and not self.ui.quietCheckBox.isChecked():
                 self.ui.ignoreCheckBox.setChecked(True)
-            
-
-
+            elif "PREVENT_FILE_OVERWRITE" in line:
+                self.ui.overwriteCheckBox.setChecked(True)
+            elif "FORCE_PRINT_URL" in line:
+                self.ui.forceurl.setCheckable(True)
+            elif "FORCE_PRINT_TITLE" in line:
+                self.ui.forcetitle.setChecked(True)
+            elif "FORCE_PRINT_ID" in line:
+                self.ui.forceid.setChecked(True)
+            elif "FORCE_PRINT_THUMBNAIL" in line:
+                self.ui.forcethumbnail.setChecked(True)
+            elif "FORCE_PRINT_DESCRIPTION" in line:
+                self.ui.forcedescription.setChecked(True)
+            elif "FORCE_PRINT_FINAL_FILENAME" in line:
+                self.ui.forcefilename.setChecked(True)
+            elif "FORCE_PRINT_DURATION" in line:
+                self.ui.forceduration.setChecked(True)
+            elif "FORCE_PRINT_JSON" in line:
+                self.ui.forcejson.setChecked(True)
+            elif "AGE_LIMIT:" in line:
+                self.ui.age_limit.setText(line.split(':')[1])
+            elif "MIN_VIEWS:" in line:
+                self.ui.min_views.setText(line.split(':')[1])
+            elif "MAX_VIEWS:" in line:
+                self.ui.max_views.setText(line.split(':')[1])
+            elif "FILE_PATH:" in line:
+                self.ui.record_file.setText(line.split('::')[1])
 
     def on_select_record_file_button_pressed(self):
         dialog = QFileDialog()
         dialog.__init__()
         self.ui.record_file.setText((QFileDialog.getExistingDirectory(dialog, "Select Directory")))
-'''
-    def on_selectDirButton_pressed(self):
-        file_dialog = QDirModel
-        file_dialog.__init__()
-        QFileDialog.getExistingDirectory()
-'''

@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'settings.ui'
 #
-# Created: Wed Feb 10 12:21:15 2016
-#      by: PyQt5 UI code generator 5.3.2
+# Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -129,6 +128,7 @@ class Ui_SettingDialog(object):
         self.quietCheckBox.toggled['bool'].connect(self.verboseCheckBox.setDisabled)
         self.quietCheckBox.toggled['bool'].connect(self.warningsCheckBox.setDisabled)
         self.buttonBox.rejected.connect(SettingDialog.close)
+        self.quietCheckBox.toggled['bool'].connect(self.ignoreCheckBox.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(SettingDialog)
 
     def retranslateUi(self, SettingDialog):
