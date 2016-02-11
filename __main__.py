@@ -10,23 +10,22 @@ import youtube_dl.version
 from Compiled_UI.MainWindow import Ui_MainWindow
 from Compiled_UI.about import Ui_About
 from Controllers.SettingsController import SettingsDialog
-
+from io import StringIO
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
 __version__ = "0.1"
 
 
 class Qyoutube_dl(QMainWindow):
-    string_buffer = ""
+    #string_buffer = ""
     video_downloader = youtube_dl.YoutubeDL()
+    s = StringIO()
 
     def __init__(self):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        sys.stdout = self.string_buffer
-        self.ui.consoleOutput.appendPlainText("Software version: " + __version__ + '\n')
-        self.ui.consoleOutput.appendPlainText("Youtube-dl version: " + youtube_dl.version.__version__ + '\n')
+        sys.stdout = self.s
 
     @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
@@ -93,8 +92,9 @@ class Qyoutube_dl(QMainWindow):
             elif "FILE_PATH:" in line:
                 foo = "bar"
             url_list = []
-            for x in range(0,self.ui.tableWidget.rowCount()):
-                url_list.append(self.ui.tableWidget.item(0,x).text())
+        for x in range(0,self.ui.tableWidget.rowCount()):
+            url_list.append(self.ui.tableWidget.item(x, 0).text())
+        self.video_downloader.download(url_list)
 
 # Main entry point
 if __name__ == "__main__":

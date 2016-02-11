@@ -2,7 +2,8 @@
 
 # Form implementation generated from reading ui file 'UI_Files/main_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created: Thu Feb 11 15:43:07 2016
+#      by: PyQt5 UI code generator 5.3.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -34,7 +35,7 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(10, 10, 181, 21))
         self.label.setObjectName("label")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 40, 551, 291))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 40, 551, 411))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -61,8 +62,6 @@ class Ui_MainWindow(object):
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
-        self.consoleOutput = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.consoleOutput.setGeometry(QtCore.QRect(10, 340, 551, 111))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -82,11 +81,6 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(212, 208, 200))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        self.consoleOutput.setPalette(palette)
-        self.consoleOutput.setDocumentTitle("")
-        self.consoleOutput.setReadOnly(True)
-        self.consoleOutput.setPlainText("")
-        self.consoleOutput.setObjectName("consoleOutput")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(390, 460, 171, 23))
         self.pushButton_2.setObjectName("pushButton_2")
@@ -125,7 +119,6 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Enter playlist or video URL:"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "URL"))
-        self.consoleOutput.setPlaceholderText(_translate("MainWindow", "output..."))
         self.pushButton_2.setText(_translate("MainWindow", "Download Videos"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))

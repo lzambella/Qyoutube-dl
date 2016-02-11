@@ -16,7 +16,7 @@ class SettingsDialog(QDialog):
         super(SettingsDialog, self).__init__()
         self.ui = Ui_SettingDialog()
         self.ui.setupUi(self)
-        if os.path.isFile('settings.txt'):
+        if os.path.isfile('settings.txt'):
             self.load_settings()  # Load saved settings
 
     @QtCore.pyqtSlot()
