@@ -48,7 +48,50 @@ class Qyoutube_dl(QMainWindow):
         next_row = self.ui.tableWidget.rowCount()
         self.ui.tableWidget.insertRow(next_row)
         # Fill the row
-        self.ui.tableWidget.setItem(next_row, 1, QTableWidgetItem(url))  # Add URL
+        self.ui.tableWidget.setItem(next_row, 0, QTableWidgetItem(url))  # Add URL
+        self.ui.lineEdit.setText('')
+
+    def on_pushButton_2_pressed(self):
+        argv = []
+        settings_reader = open("settings.txt", 'r')
+        while True:
+            line = settings_reader.readline()
+            if line is "":
+                break
+            elif "QUIET_MODE" in line:
+                argv.append('quiet')
+            elif "VERBOSE_MODE" in line and not self.ui.quietCheckBox.isChecked():
+                argv.append('verbose')
+            elif "NO_WARNINGS" in line and not self.ui.quietCheckBox.isChecked():
+                argv.append('no_warnings')
+            elif "IGNORE_ERRORS" in line and not self.ui.quietCheckBox.isChecked():
+                argv.append('ignoreerrors')
+            elif "PREVENT_FILE_OVERWRITE" in line:
+                argv.append('nooverwrites')
+            elif "FORCE_PRINT_URL" in line:
+                argv.append('forceurl')
+            elif "FORCE_PRINT_TITLE" in line:
+                argv.append('forcetitle')
+            elif "FORCE_PRINT_ID" in line:
+                argv.append('forceid')
+            elif "FORCE_PRINT_THUMBNAIL" in line:
+                argv.append('forcethumbnail')
+            elif "FORCE_PRINT_DESCRIPTION" in line:
+                argv.append('forcedescription')
+            elif "FORCE_PRINT_FINAL_FILENAME" in line:
+                argv.append('forcefilename')
+            elif "FORCE_PRINT_DURATION" in line:
+                argv.append('forcedescription')
+            elif "FORCE_PRINT_JSON" in line:
+                argv.append('forcejson')
+            elif "AGE_LIMIT:" in line:
+                argv.append('age_limit ' + line.split(':')[1])
+            elif "MIN_VIEWS:" in line:
+                argv.append('min_views ' + line.split(':')[1])
+            elif "MAX_VIEWS:" in line:
+                argv.append('max_views ' + line.split(':')[1])
+            elif "FILE_PATH:" in line:
+                foo = "bar"
 
 
 # Main entry point
