@@ -1,5 +1,5 @@
 import base64
-
+import os
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QDialog, QFileDialog
 
@@ -16,7 +16,8 @@ class SettingsDialog(QDialog):
         super(SettingsDialog, self).__init__()
         self.ui = Ui_SettingDialog()
         self.ui.setupUi(self)
-        self.load_settings()  # Load saved settings
+        if os.path.isFile('settings.txt'):
+            self.load_settings()  # Load saved settings
 
     @QtCore.pyqtSlot()
     def on_buttonBox_accepted(self):

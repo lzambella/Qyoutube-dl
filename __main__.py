@@ -92,7 +92,9 @@ class Qyoutube_dl(QMainWindow):
                 argv.append('max_views ' + line.split(':')[1])
             elif "FILE_PATH:" in line:
                 foo = "bar"
-
+            url_list = []
+            for x in range(0,self.ui.tableWidget.rowCount()):
+                url_list.append(self.ui.tableWidget.item(0,x).text())
 
 # Main entry point
 if __name__ == "__main__":
