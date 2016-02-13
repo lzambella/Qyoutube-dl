@@ -35,271 +35,17 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
-   <widget class="QWidget" name="tab">
-    <attribute name="title">
-     <string>Main</string>
-    </attribute>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>391</width>
-       <height>131</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Software Settings</string>
-     </property>
-     <widget class="QCheckBox" name="quietCheckBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Quiet mode</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="verboseCheckBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Verbose Mode</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="warningsCheckBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>No warnings</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="ignoreCheckBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ignore errors</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="overwriteCheckBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>100</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Prevent file overwrite</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tab_2">
-    <attribute name="title">
-     <string>User</string>
-    </attribute>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>401</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>User name:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>20</y>
-       <width>311</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>401</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Password:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>50</y>
-       <width>311</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-    </widget>
-   </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
-     <string>Video</string>
+     <string>Video Selection</string>
     </attribute>
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>391</width>
-       <height>191</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Force Options</string>
-     </property>
-     <widget class="QCheckBox" name="forceurl">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing final URL</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forcetitle">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing title</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forceid">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing ID</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forcethumbnail">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing thumbnail URL</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forcedescription">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>100</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing description</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forcefilename">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>120</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing final filenname</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forceduration">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing duration</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="forcejson">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>160</y>
-        <width>371</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Force printing info_dict as JSON</string>
-      </property>
-     </widget>
-    </widget>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>210</y>
+       <y>10</y>
        <width>391</width>
        <height>321</height>
       </rect>
@@ -398,7 +144,7 @@
        <string extracomment="File name of a file where all downloads are recorded. Videos already present in the file are not downloaded again."/>
       </property>
       <property name="text">
-       <string>Record file: </string>
+       <string>Save files to:</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="record_file">
@@ -426,6 +172,94 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>Filesystem Options</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>391</width>
+       <height>521</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Filesystem Options</string>
+     </property>
+     <widget class="QCheckBox" name="overwriteCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>371</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Prevent file overwrite</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_5">
+    <attribute name="title">
+     <string>Verbosity</string>
+    </attribute>
+    <widget class="QCheckBox" name="quietCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>371</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Quiet mode</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="ignoreCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>371</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ignore errors</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="warningsCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>371</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>No warnings</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="verboseCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>371</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Verbose Mode</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -444,38 +278,6 @@
  <resources/>
  <connections>
   <connection>
-   <sender>quietCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>verboseCheckBox</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>217</x>
-     <y>69</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>217</x>
-     <y>89</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>quietCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>warningsCheckBox</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>217</x>
-     <y>69</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>217</x>
-     <y>109</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>SettingDialog</receiver>
@@ -488,22 +290,6 @@
     <hint type="destinationlabel">
      <x>220</x>
      <y>310</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>quietCheckBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>ignoreCheckBox</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>217</x>
-     <y>70</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>217</x>
-     <y>130</y>
     </hint>
    </hints>
   </connection>

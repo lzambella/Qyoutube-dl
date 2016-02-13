@@ -2,8 +2,7 @@
 
 # Form implementation generated from reading ui file 'UI_Files/about.ui'
 #
-# Created: Thu Feb 11 15:43:07 2016
-#      by: PyQt5 UI code generator 5.3.2
+# Created by: PyQt5 UI code generator 5.5.1
 #
 # WARNING! All changes made in this file will be lost!
 
