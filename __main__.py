@@ -55,46 +55,34 @@ class Qyoutube_dl(QMainWindow):
         settings_reader = open("settings.txt", 'r')
         while True:
             line = settings_reader.readline()
+            self.quiet_check = False
             if line is "":
                 break
             elif "QUIET_MODE" in line:
-                argv.append('quiet')
-            elif "VERBOSE_MODE" in line and not self.ui.quietCheckBox.isChecked():
-                argv.append('verbose')
-            elif "NO_WARNINGS" in line and not self.ui.quietCheckBox.isChecked():
-                argv.append('no_warnings')
-            elif "IGNORE_ERRORS" in line and not self.ui.quietCheckBox.isChecked():
-                argv.append('ignoreerrors')
+                argv.append('-quiet')
+                self.quiet_check = True
+            elif "VERBOSE_MODE" in line and not self.quiet_check:
+                argv.append('--verbose')
+            elif "NO_WARNINGS" in line and not self.quiet_check:
+                argv.append('--no_warnings')
+            elif "IGNORE_ERRORS" in line and not self.quiet_check:
+                argv.append('--ignore-errors')
             elif "PREVENT_FILE_OVERWRITE" in line:
-                argv.append('nooverwrites')
-            elif "FORCE_PRINT_URL" in line:
-                argv.append('forceurl')
-            elif "FORCE_PRINT_TITLE" in line:
-                argv.append('forcetitle')
-            elif "FORCE_PRINT_ID" in line:
-                argv.append('forceid')
-            elif "FORCE_PRINT_THUMBNAIL" in line:
-                argv.append('forcethumbnail')
-            elif "FORCE_PRINT_DESCRIPTION" in line:
-                argv.append('forcedescription')
-            elif "FORCE_PRINT_FINAL_FILENAME" in line:
-                argv.append('forcefilename')
-            elif "FORCE_PRINT_DURATION" in line:
-                argv.append('forcedescription')
-            elif "FORCE_PRINT_JSON" in line:
-                argv.append('forcejson')
+                argv.append('--nooverwrites')
             elif "AGE_LIMIT:" in line:
-                argv.append('age_limit ' + line.split(':')[1])
+                argv.append('--age-limit ' + line.split(':')[1])
             elif "MIN_VIEWS:" in line:
-                argv.append('min_views ' + line.split(':')[1])
+                argv.append('--min-views ' + line.split(':')[1])
             elif "MAX_VIEWS:" in line:
-                argv.append('max_views ' + line.split(':')[1])
+                argv.append('--max-views ' + line.split(':')[1])
             elif "FILE_PATH:" in line:
-                foo = "bar"
-            url_list = []
-        for x in range(0,self.ui.tableWidget.rowCount()):
-            url_list.append(self.ui.tableWidget.item(x, 0).text())
-        self.video_downloader.download(url_list)
+                argv.append('--output' + line.split('::')[1] + '/%(title)s-%(id)s.%(ext)s')
+        for x in range(0, self.ui.tableWidget.rowCount()):
+            argv.append(self.ui.tableWidget.itemAt(0, x).text())
+        try:
+            youtube_dl.main(argv)
+        except:
+            print("Error.")
 
 # Main entry point
 if __name__ == "__main__":
