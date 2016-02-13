@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """__main__.py: Main execution program"""
 import sys
-
+import threading
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
 
@@ -25,7 +25,7 @@ class Qyoutube_dl(QMainWindow):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        sys.stdout = self.s
+        # sys.stdout = self.s
 
     @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
@@ -64,7 +64,7 @@ class Qyoutube_dl(QMainWindow):
             elif "VERBOSE_MODE" in line and not self.quiet_check:
                 argv.append('--verbose')
             elif "NO_WARNINGS" in line and not self.quiet_check:
-                argv.append('--no_warnings')
+                argv.append('--no-warnings')
             elif "IGNORE_ERRORS" in line and not self.quiet_check:
                 argv.append('--ignore-errors')
             elif "PREVENT_FILE_OVERWRITE" in line:
@@ -80,7 +80,9 @@ class Qyoutube_dl(QMainWindow):
         for x in range(0, self.ui.tableWidget.rowCount()):
             argv.append(self.ui.tableWidget.itemAt(0, x).text())
         try:
-            youtube_dl.main(argv)
+            thread = threading.Thread(target=youtube_dl.main(argv))
+            thread.daemon = True
+            thread.start()
         except:
             print("Error.")
 
