@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """__main__.py: Main execution program"""
 import sys
+import os
 import threading
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
@@ -52,31 +53,34 @@ class Qyoutube_dl(QMainWindow):
 
     def on_pushButton_2_pressed(self):
         argv = []
-        settings_reader = open("settings.txt", 'r')
-        while True:
-            line = settings_reader.readline()
-            self.quiet_check = False
-            if line is "":
-                break
-            elif "QUIET_MODE" in line:
-                argv.append('-quiet')
-                self.quiet_check = True
-            elif "VERBOSE_MODE" in line and not self.quiet_check:
-                argv.append('--verbose')
-            elif "NO_WARNINGS" in line and not self.quiet_check:
-                argv.append('--no-warnings')
-            elif "IGNORE_ERRORS" in line and not self.quiet_check:
-                argv.append('--ignore-errors')
-            elif "PREVENT_FILE_OVERWRITE" in line:
-                argv.append('--nooverwrites')
-            elif "AGE_LIMIT:" in line:
-                argv.append('--age-limit ' + line.split(':')[1])
-            elif "MIN_VIEWS:" in line:
-                argv.append('--min-views ' + line.split(':')[1])
-            elif "MAX_VIEWS:" in line:
-                argv.append('--max-views ' + line.split(':')[1])
-            elif "FILE_PATH:" in line:
-                argv.append('--output' + line.split('::')[1] + '/%(title)s-%(id)s.%(ext)s')
+        try:
+            settings_reader = open("settings.txt", 'r')
+            while True:
+                line = settings_reader.readline()
+                self.quiet_check = False
+                if line is "":
+                    break
+                elif "QUIET_MODE" in line:
+                    argv.append('-quiet')
+                    self.quiet_check = True
+                elif "VERBOSE_MODE" in line and not self.quiet_check:
+                    argv.append('--verbose')
+                elif "NO_WARNINGS" in line and not self.quiet_check:
+                    argv.append('--no-warnings')
+                elif "IGNORE_ERRORS" in line and not self.quiet_check:
+                    argv.append('--ignore-errors')
+                elif "PREVENT_FILE_OVERWRITE" in line:
+                    argv.append('--no-overwrites')
+                elif "AGE_LIMIT:" in line:
+                    argv.append('--age-limit ' + line.split(':')[1])
+                elif "MIN_VIEWS:" in line:
+                    argv.append('--min-views ' + line.split(':')[1])
+                elif "MAX_VIEWS:" in line:
+                    argv.append('--max-views ' + line.split(':')[1])
+                # elif "FILE_PATH:" in line:
+                #    argv.append('-o \"' + line.split('::')[1] + '/%(title)s-%(id)s.%(ext)s' + '\"')
+        except FileNotFoundError:
+            print("No settings file found. Inputting zero arguments.")
         for x in range(0, self.ui.tableWidget.rowCount()):
             argv.append(self.ui.tableWidget.itemAt(0, x).text())
         try:
@@ -84,7 +88,7 @@ class Qyoutube_dl(QMainWindow):
             thread.daemon = True
             thread.start()
         except:
-            print("Error.")
+            print('Something happened.')
 
 # Main entry point
 if __name__ == "__main__":
