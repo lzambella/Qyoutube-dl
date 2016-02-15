@@ -18,7 +18,6 @@ __version__ = "0.1"
 
 
 class Qyoutube_dl(QMainWindow):
-    #string_buffer = ""
     video_downloader = youtube_dl.YoutubeDL()
     s = StringIO()
 
@@ -72,11 +71,20 @@ class Qyoutube_dl(QMainWindow):
                 elif "PREVENT_FILE_OVERWRITE" in line:
                     argv.append('--no-overwrites')
                 elif "AGE_LIMIT:" in line:
-                    argv.append('--age-limit ' + line.split(':')[1])
+                    argv.append('--age-limit ')
+                    argv.append(line.split(':')[1])
                 elif "MIN_VIEWS:" in line:
-                    argv.append('--min-views ' + line.split(':')[1])
+                    argv.append('--min-views ')
+                    argv.append(line.split(':')[1])
                 elif "MAX_VIEWS:" in line:
-                    argv.append('--max-views ' + line.split(':')[1])
+                    argv.append('--max-views')
+                    argv.append(line.split(':')[1])
+                elif "PLAYLIST_START:" in line:
+                    argv.append('--playlist-start')
+                    argv.append(line.split(':')[1])
+                elif "PLAYLIST_END:" in line:
+                    argv.append('--playlist-end')
+                    argv.append(line.split(':')[1])
                 # elif "FILE_PATH:" in line:
                 #    argv.append('-o \"' + line.split('::')[1] + '/%(title)s-%(id)s.%(ext)s' + '\"')
         except FileNotFoundError:

@@ -145,7 +145,7 @@
       <string>Maximum file size:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="mine_file_size_text">
+    <widget class="QLineEdit" name="min_file_size_text">
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -155,7 +155,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="ma_file_size_text">
+    <widget class="QLineEdit" name="max_file_size_text">
      <property name="geometry">
       <rect>
        <x>200</x>
