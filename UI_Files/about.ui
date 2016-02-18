@@ -54,7 +54,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Qyoutube-dl created by Luke Zambella (http://github.com/arch1911)</string>
+    <string>Qyoutube-dl created by Luke Zambella (https://github.com/lzambella)</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -70,7 +70,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>youtube-dl created by Ricardo Garcia (http://rg3.name/)</string>
+    <string>youtube-dl created by Ricardo Garcia (https://rg3.name/)</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
