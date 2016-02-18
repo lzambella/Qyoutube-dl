@@ -77,7 +77,7 @@ def _real_main(argv=None):
     # Dump user agent
     if opts.dump_user_agent:
         compat_print(std_headers['User-Agent'])
-        sys.exit(0)
+        # sys.exit(0)
 
     # Batch file verification
     batch_urls = []
@@ -91,7 +91,8 @@ def _real_main(argv=None):
             if opts.verbose:
                 write_string('[debug] Batch file urls: ' + repr(batch_urls) + '\n')
         except IOError:
-            sys.exit('ERROR: batch file could not be read')
+            print("Batch file could not be read")
+            # sys.exit('ERROR: batch file could not be read')
     all_urls = batch_urls + args
     all_urls = [url.strip() for url in all_urls]
     _enc = preferredencoding()
@@ -103,7 +104,7 @@ def _real_main(argv=None):
             matchedUrls = [url for url in all_urls if ie.suitable(url)]
             for mu in matchedUrls:
                 compat_print('  ' + mu)
-        sys.exit(0)
+        # sys.exit(0)
     if opts.list_extractor_descriptions:
         for ie in list_extractors(opts.age_limit):
             if not ie._WORKING:
@@ -116,7 +117,7 @@ def _real_main(argv=None):
                 _COUNTS = ('', '5', '10', 'all')
                 desc += ' (Example: "%s%s:%s" )' % (ie.SEARCH_KEY, random.choice(_COUNTS), random.choice(_SEARCHES))
             compat_print(desc)
-        sys.exit(0)
+        # sys.exit(0)
 
     # Conflicting, missing and erroneous options
     if opts.usenetrc and (opts.username is not None or opts.password is not None):
@@ -387,8 +388,8 @@ def _real_main(argv=None):
         # Maybe do nothing
         if (len(all_urls) < 1) and (opts.load_info_filename is None):
             if opts.update_self or opts.rm_cachedir:
-                sys.exit()
-
+                # sys.exit()
+                print("ERROR")
             ydl.warn_if_short_id(sys.argv[1:] if argv is None else argv)
             parser.error(
                 'You must provide at least one URL.\n'
@@ -403,14 +404,14 @@ def _real_main(argv=None):
             ydl.to_screen('--max-download limit reached, aborting.')
             retcode = 101
 
-    sys.exit(retcode)
+    # sys.exit(retcode)
 
 
 def main(argv=None):
     try:
         _real_main(argv)
     except DownloadError:
-        sys.exit(1)
+        print("Error.")
     except SameFileError:
         sys.exit('ERROR: fixed output name but more than one file to download')
     except KeyboardInterrupt:
