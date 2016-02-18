@@ -1,31 +1,65 @@
 #!/usr/bin/env python
 """__main__.py: Main execution program"""
 import sys
-import os
 import threading
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
-
+from PyQt5.QtGui import QTextCursor
+from queue import Queue
 import youtube_dl
 import youtube_dl.version
 from Compiled_UI.MainWindow import Ui_MainWindow
 from Compiled_UI.about import Ui_About
 from Controllers.SettingsController import SettingsDialog
-from io import StringIO
+from PyQt5.QtCore import QObject, pyqtSignal
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
 __version__ = "0.1"
 
 
+class StreamWriter(object):
+    def __init__(self, queue):
+        self.queue = queue
+
+    def write(self, text):
+        self.queue.put(text)
+
+class StreamReceiver(QObject):
+    signal = pyqtSignal(str)
+
+    def __init__(self, queue, *args, **kwargs):
+        QObject.__init__(self, *args, **kwargs)
+        self.queue = queue
+
+    @QtCore.pyqtSlot()
+    def run(self):
+        while True:
+            text = self.queue.get()
+            self.signal.emit(text)
+
+class ConsoleWriter():
+    @QtCore.pyqtSlot()
+    def Run(self, argv):
+        try:
+            youtube_dl.main(argv)
+        except:
+            print('Something happened.')
+
+
 class Qyoutube_dl(QMainWindow):
     video_downloader = youtube_dl.YoutubeDL()
-    s = StringIO()
-
     def __init__(self):
         super(Qyoutube_dl, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        # sys.stdout = self.s
+        queue = Queue()
+        sys.stdout = StreamWriter(queue)
+        thread = QtCore.QThread()
+        my_receiver = StreamReceiver(queue)
+        my_receiver.signal.connect(self.append_text)
+        my_receiver.moveToThread(thread)
+        thread.started.connect(my_receiver.run)
+        thread.start()
 
     @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
@@ -49,6 +83,19 @@ class Qyoutube_dl(QMainWindow):
         # Fill the row
         self.ui.tableWidget.setItem(next_row, 0, QTableWidgetItem(url))  # Add URL
         self.ui.lineEdit.setText('')
+
+    @QtCore.pyqtSlot()
+    def start_thread(self):
+        self.thread = QtCore.QThread()
+        self.ConsoleWriter = ConsoleWriter()
+        self.ConsoleWriter.moveToThread(self.thread)
+        self.thread.started.connect(self.ConsoleWriter.run)
+        self.thread.start()
+
+    @QtCore.pyqtSlot(str)
+    def append_text(self,text):
+        self.ui.plainTextEdit.moveCursor(QTextCursor.End)
+        self.ui.plainTextEdit.insertPlainText( text )
 
     def on_pushButton_2_pressed(self):
         argv = []
@@ -91,17 +138,13 @@ class Qyoutube_dl(QMainWindow):
             print("No settings file found. Inputting zero arguments.")
         for x in range(0, self.ui.tableWidget.rowCount()):
             argv.append(self.ui.tableWidget.itemAt(0, x).text())
-        try:
-            thread = threading.Thread(target=youtube_dl.main(argv))
-            thread.daemon = True
-            thread.start()
-        except:
-            print('Something happened.')
+        self.start_thread()
+        ConsoleWriter.Run(argv)
 
 # Main entry point
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     prgm = Qyoutube_dl()
-    prgm.__init__()
+    # prgm.__init__()
     prgm.show()
     sys.exit(app.exec_())
