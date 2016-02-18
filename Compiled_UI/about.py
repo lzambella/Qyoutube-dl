@@ -36,6 +36,6 @@ class Ui_About(object):
     def retranslateUi(self, About):
         _translate = QtCore.QCoreApplication.translate
         About.setWindowTitle(_translate("About", "About"))
-        self.label.setText(_translate("About", "Qyoutube-dl created by Luke Zambella (http://github.com/arch1911)"))
-        self.label_2.setText(_translate("About", "youtube-dl created by Ricardo Garcia (http://rg3.name/)"))
+        self.label.setText(_translate("About", "Qyoutube-dl created by Luke Zambella (https://github.com/lzambella)"))
+        self.label_2.setText(_translate("About", "youtube-dl created by Ricardo Garcia (https://rg3.name/)"))
 
