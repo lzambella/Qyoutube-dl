@@ -4,21 +4,49 @@ import sys
 import youtube_dl
 import youtube_dl.version
 from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
-from PyQt5.QtGui import QTextCursor
-from PyQt5.QtCore import QObject, pyqtSignal, QThread, pyqtSlot, Qt
+from PyQt5.QtGui import QTextCursor, QColor
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt
 from queue import Queue
 from Compiled_UI.MainWindow import Ui_MainWindow
 from Compiled_UI.about import Ui_About
 from Controllers.SettingsController import SettingsDialog
-
+from youtube_dl import version
+import threading
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
 __version__ = "0.2"
 
 
+class OutLog:
+    def __init__(self, edit, out=None, color=None):
+        """(edit, out=None, color=None) -> can write stdout, stderr to a
+        QTextEdit.
+        edit = QTextEdit
+        out = alternate stream ( can be the original sys.stdout )
+        color = alternate color (i.e. color stderr a different color)
+        """
+        self.edit = edit
+        self.out = None
+        self.color = color
+
+    def write(self, m):
+        # if self.color:
+            # tc = self.edit.textColor()
+            # self.edit.setTextColor(self.color)
+
+        self.edit.moveCursor(QTextCursor.End)
+        self.edit.insertPlainText(m)
+
+        # if self.color:
+            # self.edit.setTextColor(tc)
+
+        if self.out:
+            self.out.write(m)
+
+
 class WriteStream(object):
-    def __init__(self, queue):
-        self.queue = queue
+    def __init__(self, stream_queue):
+        self.queue = stream_queue
 
     def write(self, text):
         self.queue.put(text)
@@ -27,9 +55,9 @@ class WriteStream(object):
 class StreamReceiver(QObject):
     signal = pyqtSignal(str)
 
-    def __init__(self, queue, *args, **kwargs):
+    def __init__(self, stream_queue, *args, **kwargs):
         QObject.__init__(self, *args, **kwargs)
-        self.queue = queue
+        self.queue = stream_queue
 
     @pyqtSlot()
     def run(self):
@@ -38,20 +66,19 @@ class StreamReceiver(QObject):
             self.signal.emit(text)
 
 
-class ConsoleWriter(QObject):
-    @pyqtSlot()
+class ThreadedFunction(threading.Thread):
     def run(self, argv):
-            video_downloader = youtube_dl
-            video_downloader.main(argv)
+        youtube_dl.main(argv)
 
 
-class Qyoutube_dl(QMainWindow):
-    video_downloader = youtube_dl.YoutubeDL()
+class MainWindow(QMainWindow):
 
     def __init__(self):
-        super(Qyoutube_dl, self).__init__()
+        super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        sys.stdout = OutLog(self.ui.plainTextEdit, sys.stdout)
+        sys.stderr = OutLog(self.ui.plainTextEdit, sys.stderr, QColor(255, 0, 0))
 
     @pyqtSlot()
     def on_actionAbout_triggered(self):
@@ -73,21 +100,18 @@ class Qyoutube_dl(QMainWindow):
         next_row = self.ui.tableWidget.rowCount()
         self.ui.tableWidget.insertRow(next_row)
         # Fill the row
-        self.ui.tableWidget.setItem(next_row, 0, QTableWidgetItem(url))  # Add URL
+        if len(url) > 0:
+            self.ui.tableWidget.setItem(next_row, 0, QTableWidgetItem(url))  # Add URL
         self.ui.lineEdit.setText('')
-
-    @pyqtSlot()
-    def start_thread(self, argv):
-        q_thread = QThread()
-        console_writer = ConsoleWriter()
-        console_writer.moveToThread(q_thread)
-        q_thread.started.connect(console_writer.run(argv))
-        q_thread.start()
 
     @pyqtSlot(str)
     def append_text(self, text):
         self.ui.plainTextEdit.moveCursor(QTextCursor.End)
         self.ui.plainTextEdit.insertPlainText(text)
+
+    def download_thread(self, params):
+        video_downloader = youtube_dl
+        video_downloader.main(params)
 
     def on_pushButton_2_pressed(self):
         argv = []
@@ -99,7 +123,7 @@ class Qyoutube_dl(QMainWindow):
                 if line is "":
                     break
                 elif "QUIET_MODE" in line:
-                    argv.append('-quiet')
+                    argv.append('--quiet')
                     quiet_check = True
                 elif "VERBOSE_MODE" in line and not quiet_check:
                     argv.append('--verbose')
@@ -131,27 +155,18 @@ class Qyoutube_dl(QMainWindow):
         for x in range(0, self.ui.tableWidget.rowCount()):
             argv.append(self.ui.tableWidget.itemAt(0, x).text())
         try:
-            self.start_thread(argv)
-        except:  # youtube-dl always has some sort of exception
-            pass
-        self.ui.tableWidget.clear()  # Remove all the videos from the list
-        self.ui.tableWidget.clearContents()
+            youtube_dl.main(argv)
+        except Exception as e:  # youtube-dl always has some sort of exception
+            print(e)
+        for i in range(self.ui.tableWidget.rowCount()):
+            self.ui.tableWidget.removeRow(i)
 
 # Main entry point
 if __name__ == "__main__":
     queue = Queue()
-    # Redirect stderr and sdtout to the programs built in console
-    sys.stdout = WriteStream(queue)
-    sys.stderr = WriteStream(queue)
     app = QApplication(sys.argv)
-    program = Qyoutube_dl()
+    program = MainWindow()
     program.show()
-    # Start a thread that reads for console output
-    thread = QThread()
-    my_receiver = StreamReceiver(queue)
-    my_receiver.signal.connect(program.append_text)
-    my_receiver.moveToThread(thread)
-    thread.started.connect(my_receiver.run)
-    thread.start()
     print("Software version: " + __version__)
-    app.exec_()
+    print("Youtube_dl version: " + version.__version__)
+    sys.exit(app.exec_())

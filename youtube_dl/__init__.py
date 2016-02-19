@@ -68,7 +68,7 @@ def _real_main(argv=None):
     if opts.headers is not None:
         for h in opts.headers:
             if h.find(':', 1) < 0:
-                parser.error('wrong header formatting, it should be key:value, not "%s"' % h)
+                print('wrong header formatting, it should be key:value, not "%s"' % h)
             key, value = h.split(':', 2)
             if opts.verbose:
                 write_string('[debug] Adding header from command line option %s:%s\n' % (key, value))
@@ -77,7 +77,7 @@ def _real_main(argv=None):
     # Dump user agent
     if opts.dump_user_agent:
         compat_print(std_headers['User-Agent'])
-        # sys.exit(0)
+        print("Exit code 0")
 
     # Batch file verification
     batch_urls = []
@@ -92,7 +92,6 @@ def _real_main(argv=None):
                 write_string('[debug] Batch file urls: ' + repr(batch_urls) + '\n')
         except IOError:
             print("Batch file could not be read")
-            # sys.exit('ERROR: batch file could not be read')
     all_urls = batch_urls + args
     all_urls = [url.strip() for url in all_urls]
     _enc = preferredencoding()
@@ -104,7 +103,7 @@ def _real_main(argv=None):
             matchedUrls = [url for url in all_urls if ie.suitable(url)]
             for mu in matchedUrls:
                 compat_print('  ' + mu)
-        # sys.exit(0)
+        print("Exit code 0")
     if opts.list_extractor_descriptions:
         for ie in list_extractors(opts.age_limit):
             if not ie._WORKING:
@@ -117,33 +116,33 @@ def _real_main(argv=None):
                 _COUNTS = ('', '5', '10', 'all')
                 desc += ' (Example: "%s%s:%s" )' % (ie.SEARCH_KEY, random.choice(_COUNTS), random.choice(_SEARCHES))
             compat_print(desc)
-        # sys.exit(0)
+        print("Exit code 0")
 
     # Conflicting, missing and erroneous options
     if opts.usenetrc and (opts.username is not None or opts.password is not None):
-        parser.error('using .netrc conflicts with giving username/password')
+        print('using .netrc conflicts with giving username/password')
     if opts.password is not None and opts.username is None:
-        parser.error('account username missing\n')
+        print('account username missing\n')
     if opts.outtmpl is not None and (opts.usetitle or opts.autonumber or opts.useid):
-        parser.error('using output template conflicts with using title, video ID or auto number')
+        print('using output template conflicts with using title, video ID or auto number')
     if opts.usetitle and opts.useid:
-        parser.error('using title conflicts with using video ID')
+        print('using title conflicts with using video ID')
     if opts.username is not None and opts.password is None:
         opts.password = compat_getpass('Type account password and press [Return]: ')
     if opts.ratelimit is not None:
         numeric_limit = FileDownloader.parse_bytes(opts.ratelimit)
         if numeric_limit is None:
-            parser.error('invalid rate limit specified')
+            print('invalid rate limit specified')
         opts.ratelimit = numeric_limit
     if opts.min_filesize is not None:
         numeric_limit = FileDownloader.parse_bytes(opts.min_filesize)
         if numeric_limit is None:
-            parser.error('invalid min_filesize specified')
+            print('invalid min_filesize specified')
         opts.min_filesize = numeric_limit
     if opts.max_filesize is not None:
         numeric_limit = FileDownloader.parse_bytes(opts.max_filesize)
         if numeric_limit is None:
-            parser.error('invalid max_filesize specified')
+            print('invalid max_filesize specified')
         opts.max_filesize = numeric_limit
     if opts.retries is not None:
         if opts.retries in ('inf', 'infinite'):
@@ -152,11 +151,11 @@ def _real_main(argv=None):
             try:
                 opts_retries = int(opts.retries)
             except (TypeError, ValueError):
-                parser.error('invalid retry count specified')
+                print('invalid retry count specified')
     if opts.buffersize is not None:
         numeric_buffersize = FileDownloader.parse_bytes(opts.buffersize)
         if numeric_buffersize is None:
-            parser.error('invalid buffer size specified')
+            print('invalid buffer size specified')
         opts.buffersize = numeric_buffersize
     if opts.playliststart <= 0:
         raise ValueError('Playlist start must be positive')
@@ -164,17 +163,17 @@ def _real_main(argv=None):
         raise ValueError('Playlist end must be greater than playlist start')
     if opts.extractaudio:
         if opts.audioformat not in ['best', 'aac', 'mp3', 'm4a', 'opus', 'vorbis', 'wav']:
-            parser.error('invalid audio format specified')
+            print('invalid audio format specified')
     if opts.audioquality:
         opts.audioquality = opts.audioquality.strip('k').strip('K')
         if not opts.audioquality.isdigit():
-            parser.error('invalid audio quality specified')
+            print('invalid audio quality specified')
     if opts.recodevideo is not None:
         if opts.recodevideo not in ['mp4', 'flv', 'webm', 'ogg', 'mkv', 'avi']:
-            parser.error('invalid video recode format specified')
+            print('invalid video recode format specified')
     if opts.convertsubtitles is not None:
         if opts.convertsubtitles not in ['srt', 'vtt', 'ass']:
-            parser.error('invalid subtitle format specified')
+            print('invalid subtitle format specified')
 
     if opts.date is not None:
         date = DateRange.day(opts.date)
@@ -199,7 +198,7 @@ def _real_main(argv=None):
                (opts.autonumber and '%(autonumber)s-%(id)s.%(ext)s') or
                DEFAULT_OUTTMPL)
     if not os.path.splitext(outtmpl)[1] and opts.extractaudio:
-        parser.error('Cannot download a video and extract audio into the same'
+        print('Cannot download a video and extract audio into the same'
                      ' file! Use "{0}.%(ext)s" instead of "{0}" as the output'
                      ' template'.format(outtmpl))
 
@@ -260,7 +259,7 @@ def _real_main(argv=None):
             import xattr
             xattr  # Confuse flake8
         except ImportError:
-            parser.error('setting filesize xattr requested but python-xattr is not available')
+            print('setting filesize xattr requested but python-xattr is not available')
     external_downloader_args = None
     if opts.external_downloader_args:
         external_downloader_args = compat_shlex_split(opts.external_downloader_args)
@@ -375,46 +374,37 @@ def _real_main(argv=None):
         'postprocessor_args': postprocessor_args,
         'cn_verification_proxy': opts.cn_verification_proxy,
     }
-
     with YoutubeDL(ydl_opts) as ydl:
         # Update version
         if opts.update_self:
             update_self(ydl.to_screen, opts.verbose, ydl._opener)
-
         # Remove cache dir
         if opts.rm_cachedir:
             ydl.cache.remove()
-
         # Maybe do nothing
         if (len(all_urls) < 1) and (opts.load_info_filename is None):
             if opts.update_self or opts.rm_cachedir:
-                # sys.exit()
                 print("ERROR")
             ydl.warn_if_short_id(sys.argv[1:] if argv is None else argv)
-            parser.error(
-                'You must provide at least one URL.\n'
-                'Type youtube-dl --help to see a list of all options.')
-
+            print('You must provide at least one URL.')
         try:
             if opts.load_info_filename is not None:
                 retcode = ydl.download_with_info_file(opts.load_info_filename)
             else:
                 retcode = ydl.download(all_urls)
         except MaxDownloadsReached:
-            ydl.to_screen('--max-download limit reached, aborting.')
-            retcode = 101
-
-    # sys.exit(retcode)
+            print('--max-download limit reached, aborting.')
+    print("Operation completed successfully with return code:" + str(retcode))
 
 
 def main(argv=None):
     try:
         _real_main(argv)
     except DownloadError:
-        print("Error.")
+        print("Download error.")
     except SameFileError:
-        sys.exit('ERROR: fixed output name but more than one file to download')
+        print('ERROR: fixed output name but more than one file to download')
     except KeyboardInterrupt:
-        sys.exit('\nERROR: Interrupted by user')
+        print('\nERROR: Interrupted by user')
 
 __all__ = ['main', 'YoutubeDL', 'gen_extractors', 'list_extractors']
