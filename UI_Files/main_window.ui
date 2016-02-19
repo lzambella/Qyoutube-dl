@@ -33,7 +33,7 @@
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
-       <item row="3" column="0">
+       <item row="2" column="0">
         <widget class="QPushButton" name="pushButton_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -145,7 +145,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Enter playlist or video URL:</string>
+            <string>Enter video URL:</string>
            </property>
           </widget>
          </item>
@@ -174,9 +174,6 @@
          </item>
         </layout>
        </item>
-       <item row="2" column="0">
-        <widget class="QPlainTextEdit" name="plainTextEdit"/>
-       </item>
       </layout>
      </widget>
     </item>
@@ -188,7 +185,7 @@
      <x>0</x>
      <y>0</y>
      <width>937</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

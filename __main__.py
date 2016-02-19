@@ -6,12 +6,12 @@ import youtube_dl.version
 from PyQt5.QtWidgets import QMainWindow, QDialog, QApplication, QTableWidgetItem
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, Qt
-from queue import Queue
 from Compiled_UI.MainWindow import Ui_MainWindow
 from Compiled_UI.about import Ui_About
 from Controllers.SettingsController import SettingsDialog
 from youtube_dl import version
 import threading
+import subprocess
 
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
@@ -47,6 +47,9 @@ class OutLog:
     def flush(self):
         pass
 
+    def fileno(self):
+        pass
+
 
 class WriteStream(object):
     def __init__(self, stream_queue):
@@ -80,8 +83,6 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        sys.stdout = OutLog(self.ui.plainTextEdit, sys.stdout)
-        sys.stderr = OutLog(self.ui.plainTextEdit, sys.stderr, QColor(255, 0, 0))
 
     @pyqtSlot()
     def on_actionAbout_triggered(self):
@@ -150,15 +151,15 @@ class MainWindow(QMainWindow):
         for x in range(0, self.ui.tableWidget.rowCount()):
             argv.append(self.ui.tableWidget.itemAt(0, x).text())
         try:
-            video_downloader = threading.Thread()
-            video_downloader.daemon = True
-            video_downloader.setDaemon(youtube_dl.main(argv))
-            video_downloader.start()
+            subprocess.Popen(['python', 'youtube_dl/__main__.py'] + argv, shell=True)
         except Exception as e:  # youtube-dl always has some sort of exception
             print(e)
-        for i in range(0, self.ui.tableWidget.rowCount() - 1):
-            self.ui.tableWidget.removeRow(i)
-        video_downloader.join()
+        self.ui.tableWidget.setRowCount(0)
+        self.ui.tableWidget.setColumnCount(0)
+
+
+def download_thread(argv):
+    youtube_dl.main(argv)
 
 
 def gui_thread():
