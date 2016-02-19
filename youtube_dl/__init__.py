@@ -394,7 +394,7 @@ def _real_main(argv=None):
                 retcode = ydl.download(all_urls)
         except MaxDownloadsReached:
             print('--max-download limit reached, aborting.')
-    print("Operation completed successfully with return code:" + str(retcode))
+    print("Operation completed successfully with return code: " + str(retcode))
 
 
 def main(argv=None):

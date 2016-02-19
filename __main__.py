@@ -12,6 +12,7 @@ from Compiled_UI.about import Ui_About
 from Controllers.SettingsController import SettingsDialog
 from youtube_dl import version
 import threading
+
 __author__ = "Luke Zambella"
 __copyright__ = "Copyright 2016"
 __version__ = "0.2"
@@ -31,18 +32,20 @@ class OutLog:
 
     def write(self, m):
         # if self.color:
-            # tc = self.edit.textColor()
-            # self.edit.setTextColor(self.color)
+        # tc = self.edit.textColor()
+        # self.edit.setTextColor(self.color)
 
         self.edit.moveCursor(QTextCursor.End)
         self.edit.insertPlainText(m)
 
         # if self.color:
-            # self.edit.setTextColor(tc)
+        # self.edit.setTextColor(tc)
 
         if self.out:
             self.out.write(m)
 
+    def flush(self):
+        pass
 
 class WriteStream(object):
     def __init__(self, stream_queue):
@@ -72,7 +75,6 @@ class ThreadedFunction(threading.Thread):
 
 
 class MainWindow(QMainWindow):
-
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -98,21 +100,13 @@ class MainWindow(QMainWindow):
     def on_pushButton_pressed(self):
         url = self.ui.lineEdit.text()
         next_row = self.ui.tableWidget.rowCount()
-        self.ui.tableWidget.insertRow(next_row)
         # Fill the row
-        if len(url) > 0:
+        if len(url) > 10:
+            self.ui.tableWidget.insertRow(next_row)
             self.ui.tableWidget.setItem(next_row, 0, QTableWidgetItem(url))  # Add URL
         self.ui.lineEdit.setText('')
 
-    @pyqtSlot(str)
-    def append_text(self, text):
-        self.ui.plainTextEdit.moveCursor(QTextCursor.End)
-        self.ui.plainTextEdit.insertPlainText(text)
-
-    def download_thread(self, params):
-        video_downloader = youtube_dl
-        video_downloader.main(params)
-
+    @pyqtSlot()
     def on_pushButton_2_pressed(self):
         argv = []
         try:
@@ -148,8 +142,8 @@ class MainWindow(QMainWindow):
                 elif "PLAYLIST_END:" in line:
                     argv.append('--playlist-end')
                     argv.append(line.split(':')[1])
-                # elif "FILE_PATH:" in line:
-                #    argv.append('-o \"' + line.split('::')[1] + '/%(title)s-%(id)s.%(ext)s' + '\"')
+                    # elif "FILE_PATH:" in line:
+                    #    argv.append('-o \"' + line.split('::')[1] + '/%(title)s-%(id)s.%(ext)s' + '\"')
         except FileNotFoundError:
             print("No settings file found. Inputting zero arguments.")
         for x in range(0, self.ui.tableWidget.rowCount()):
@@ -160,6 +154,7 @@ class MainWindow(QMainWindow):
             print(e)
         for i in range(self.ui.tableWidget.rowCount()):
             self.ui.tableWidget.removeRow(i)
+
 
 # Main entry point
 if __name__ == "__main__":
