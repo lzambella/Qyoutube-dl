@@ -47,6 +47,7 @@ class OutLog:
     def flush(self):
         pass
 
+
 class WriteStream(object):
     def __init__(self, stream_queue):
         self.queue = stream_queue
@@ -149,19 +150,28 @@ class MainWindow(QMainWindow):
         for x in range(0, self.ui.tableWidget.rowCount()):
             argv.append(self.ui.tableWidget.itemAt(0, x).text())
         try:
-            youtube_dl.main(argv)
+            video_downloader = threading.Thread()
+            video_downloader.daemon = True
+            video_downloader.setDaemon(youtube_dl.main(argv))
+            video_downloader.start()
         except Exception as e:  # youtube-dl always has some sort of exception
             print(e)
-        for i in range(self.ui.tableWidget.rowCount()):
+        for i in range(0, self.ui.tableWidget.rowCount() - 1):
             self.ui.tableWidget.removeRow(i)
+        video_downloader.join()
 
 
-# Main entry point
-if __name__ == "__main__":
-    queue = Queue()
+def gui_thread():
     app = QApplication(sys.argv)
     program = MainWindow()
     program.show()
     print("Software version: " + __version__)
     print("Youtube_dl version: " + version.__version__)
     sys.exit(app.exec_())
+
+# Main entry point
+if __name__ == "__main__":
+    main_thread = threading.Thread()
+    main_thread.daemon = True
+    main_thread.setDaemon(gui_thread())
+    main_thread.start()
