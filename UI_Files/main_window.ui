@@ -103,20 +103,120 @@
           <widget class="QListWidget" name="url_list"/>
          </item>
          <item>
-          <widget class="QTabWidget" name="tabWidget">
+          <widget class="QTabWidget" name="settings_panel">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
-           <widget class="QWidget" name="tab">
+           <widget class="QWidget" name="video_selection">
             <attribute name="title">
-             <string>Tab 1</string>
+             <string>Video Selection</string>
             </attribute>
+            <widget class="QWidget" name="gridLayoutWidget">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>421</width>
+               <height>591</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="3" column="1">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Minimum files size:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLineEdit" name="age_limit"/>
+              </item>
+              <item row="1" column="3">
+               <widget class="QLineEdit" name="min_views"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Minimum Views:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Age Limit:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Max Views:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="3">
+               <widget class="QLineEdit" name="max_file_size"/>
+              </item>
+              <item row="2" column="3">
+               <widget class="QLineEdit" name="max_views"/>
+              </item>
+              <item row="3" column="3">
+               <widget class="QLineEdit" name="mine_file_size"/>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>Maximum file size:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="3">
+               <widget class="QLineEdit" name="playlist_start"/>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Playlist start number:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Playlist End:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QLineEdit" name="playlist_end"/>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLabel" name="label_9">
+                <property name="statusTip">
+                 <string extracomment="Use this to only download certain playlist items, separate using a comma. This can also do ranges (eg. 1-10)"/>
+                </property>
+                <property name="text">
+                 <string>Playlist Items:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="3">
+               <widget class="QLineEdit" name="playlist_list"/>
+              </item>
+             </layout>
+            </widget>
            </widget>
-           <widget class="QWidget" name="tab_2">
+           <widget class="QWidget" name="filesystem_options">
             <attribute name="title">
-             <string>Tab 2</string>
+             <string>Filesystem Options</string>
             </attribute>
             <zorder></zorder>
+           </widget>
+           <widget class="QWidget" name="verbosity">
+            <attribute name="title">
+             <string>Verbosity</string>
+            </attribute>
            </widget>
           </widget>
          </item>
