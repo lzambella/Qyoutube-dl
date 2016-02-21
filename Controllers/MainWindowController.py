@@ -6,6 +6,7 @@ import subprocess
 
 
 class MainWindow(QMainWindow):
+    argv = []
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -29,11 +30,58 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_pushButton_2_pressed(self):
-        argv = []
+        self.check_settings()
         for x in range(0, self.ui.url_list.count()):
-            argv.append(self.ui.url_list.itemAt(x))
+            self.argv.append(self.ui.url_list.item(x).text())
         try:
-            subprocess.Popen(['python', 'youtube_dl/__main__.py'] + argv, shell=True)
+            subprocess.Popen(['python', 'youtube_dl/__main__.py'] + self.argv, shell=True)
         except Exception as e:
             print(e)
         self.ui.url_list.clear()
+        self.argv.clear()
+
+    def check_settings(self):
+        if len(self.ui.age_limit.text()) > 0 and self.isInteger(self.ui.age_limit.text()):
+            self.argv.append("--age-limit")
+            self.argv.append(self.ui.age_limit.text())
+        if len(self.ui.min_views.text()) > 0 and self.is_integer(self.ui.min_views.text()):
+            self.argv.append("--min-views")
+            self.argv.append(self.ui.min_views.text())
+        if len(self.ui.max_views.text()) > 0 and self.is_integer((self.ui.max_views.text())):
+            self.argv.append("--max-views")
+            self.argv.append(self.ui.max_views.text())
+        if len(self.ui.min_file_size.text()) > 0 and self.is_integer(self.ui.min_file_size.text()):
+            self.argv.append("--min-filesize")
+            self.argv.append(self.ui.min_file_size.text())
+        if len(self.ui.max_file_size.text()) > 0 and self.is_integer(self.ui.max_file_size.text()):
+            self.argv.append("--max_filesize")
+            self.argv.append(self.ui.max_file_size.text())
+        if len(self.ui.playlist_start.text()) > 0 and self.is_integer(self.ui.playlist_start.text()):
+            self.argv.append("--playlist-start")
+            self.argv.append(self.ui.playlist_start.text())
+        if len(self.ui.playlist_end.text()) > 0 and self.is_integer(self.ui.playlist_end.text()):
+            self.argv.append("--playlist-end")
+            self.argv.append(self.ui.playlist_start.text())
+        if len(self.ui.playlist_list.text()) > 0:
+            self.argv.append("--playlist-items")
+            self.argv.append(self.ui.playlist_list.text())
+        if len(self.ui.on_date.text()) > 0:
+            self.argv.append("--date")
+            self.argv.append(self.ui.on_date.text())
+        if len(self.ui.date_before.text()) > 0 and not len(self.ui.on_date.text()) > 0:
+            self.argv.append("--datebefore")
+            self.argv.append(self.ui.date_before.text())
+        if len(self.ui.date_after.text()) > 0 and not len(self.ui.on_date.text()) > 0:
+            self.argv.append("--dateafter")
+            self.argv.append(self.ui.date_after.text())
+        if len(self.ui.filter.text()) > 0:
+            self.argv.append("--match-filter")
+            self.argv.append(self.ui.filter.text())
+
+    @staticmethod
+    def is_integer(value):
+        try:
+            i = int(value)
+            return True
+        except ValueError:
+            return False
