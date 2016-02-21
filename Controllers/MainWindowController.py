@@ -2,11 +2,13 @@ from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.QtCore import pyqtSlot, Qt
 from Compiled_UI.MainWindow import Ui_MainWindow
 from Compiled_UI.about import Ui_About
+import sys
 import subprocess
 
 
 class MainWindow(QMainWindow):
     argv = []
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -30,18 +32,21 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def on_pushButton_2_pressed(self):
-        self.check_settings()
-        for x in range(0, self.ui.url_list.count()):
-            self.argv.append(self.ui.url_list.item(x).text())
-        try:
-            subprocess.Popen(['python', 'youtube_dl/__main__.py'] + self.argv, shell=True)
-        except Exception as e:
-            print(e)
-        self.ui.url_list.clear()
+        if self.ui.url_list.count() > 0:
+            self.check_settings()
+            for x in range(0, self.ui.url_list.count()):
+                self.argv.append(self.ui.url_list.item(x).text())
+            try:
+                subprocess.Popen([sys.executable, 'youtube_dl/__main__.py'] + self.argv, shell=False)
+            except Exception as e:
+                print(e)
+            self.ui.url_list.clear()
+        else:
+            print("ERROR: No URLs were given.")
         self.argv.clear()
 
     def check_settings(self):
-        if len(self.ui.age_limit.text()) > 0 and self.isInteger(self.ui.age_limit.text()):
+        if len(self.ui.age_limit.text()) > 0 and self.is_integer(self.ui.age_limit.text()):
             self.argv.append("--age-limit")
             self.argv.append(self.ui.age_limit.text())
         if len(self.ui.min_views.text()) > 0 and self.is_integer(self.ui.min_views.text()):
@@ -78,8 +83,7 @@ class MainWindow(QMainWindow):
             self.argv.append("--match-filter")
             self.argv.append(self.ui.filter.text())
 
-    @staticmethod
-    def is_integer(value):
+    def is_integer(self, value):
         try:
             i = int(value)
             return True
