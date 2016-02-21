@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>937</width>
-    <height>775</height>
+    <width>749</width>
+    <height>779</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -85,7 +85,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>OK</string>
+            <string>Add</string>
            </property>
           </widget>
          </item>
@@ -104,8 +104,14 @@
          </item>
          <item>
           <widget class="QTabWidget" name="settings_panel">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>5</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="video_selection">
             <attribute name="title">
@@ -121,6 +127,63 @@
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetNoConstraint</enum>
+              </property>
+              <item row="11" column="3">
+               <widget class="QLineEdit" name="filter">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>Date:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="3">
+               <widget class="QLineEdit" name="date_before">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>Before date:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="3">
+               <widget class="QLineEdit" name="on_date">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="3">
+               <widget class="QLineEdit" name="date_after">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
               <item row="3" column="1">
                <widget class="QLabel" name="label_5">
                 <property name="text">
@@ -129,22 +192,39 @@
                </widget>
               </item>
               <item row="0" column="3">
-               <widget class="QLineEdit" name="age_limit"/>
+               <widget class="QLineEdit" name="age_limit">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
+               <widget class="QLabel" name="label_13">
+                <property name="whatsThis">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>Filter:</string>
+                </property>
+               </widget>
               </item>
               <item row="1" column="3">
-               <widget class="QLineEdit" name="min_views"/>
+               <widget class="QLineEdit" name="min_views">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
               </item>
               <item row="1" column="1">
                <widget class="QLabel" name="label_3">
                 <property name="text">
                  <string>Minimum Views:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>Age Limit:</string>
                 </property>
                </widget>
               </item>
@@ -155,14 +235,42 @@
                 </property>
                </widget>
               </item>
+              <item row="10" column="1">
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>After date:</string>
+                </property>
+               </widget>
+              </item>
               <item row="4" column="3">
-               <widget class="QLineEdit" name="max_file_size"/>
+               <widget class="QLineEdit" name="max_file_size">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
               </item>
               <item row="2" column="3">
-               <widget class="QLineEdit" name="max_views"/>
+               <widget class="QLineEdit" name="max_views">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
               </item>
               <item row="3" column="3">
-               <widget class="QLineEdit" name="mine_file_size"/>
+               <widget class="QLineEdit" name="mine_file_size">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
               </item>
               <item row="4" column="1">
                <widget class="QLabel" name="label_6">
@@ -172,7 +280,14 @@
                </widget>
               </item>
               <item row="5" column="3">
-               <widget class="QLineEdit" name="playlist_start"/>
+               <widget class="QLineEdit" name="playlist_start">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
               </item>
               <item row="5" column="1">
                <widget class="QLabel" name="label_7">
@@ -180,16 +295,6 @@
                  <string>Playlist start number:</string>
                 </property>
                </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>Playlist End:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="3">
-               <widget class="QLineEdit" name="playlist_end"/>
               </item>
               <item row="7" column="1">
                <widget class="QLabel" name="label_9">
@@ -201,8 +306,39 @@
                 </property>
                </widget>
               </item>
+              <item row="6" column="1">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Playlist End:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QLineEdit" name="playlist_end">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
               <item row="7" column="3">
-               <widget class="QLineEdit" name="playlist_list"/>
+               <widget class="QLineEdit" name="playlist_list">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Age Limit:</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -211,12 +347,198 @@
             <attribute name="title">
              <string>Filesystem Options</string>
             </attribute>
+            <widget class="QWidget" name="gridLayoutWidget_2">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>421</width>
+               <height>591</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <property name="sizeConstraint">
+               <enum>QLayout::SetNoConstraint</enum>
+              </property>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="batch_file"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="no_overwrites">
+                <property name="text">
+                 <string>Prevent file overwriting</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>Batch file:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="select_batch_file">
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="vide_id_name">
+                <property name="text">
+                 <string>Use video ID in name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QCheckBox" name="restrict_filename">
+                <property name="text">
+                 <string>Restrict names to only ASCII</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_15">
+                <property name="text">
+                 <string>Output template:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="output_template"/>
+              </item>
+              <item row="3" column="1">
+               <widget class="QCheckBox" name="write_info_json">
+                <property name="text">
+                 <string>Write to json file</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="write_description">
+                <property name="text">
+                 <string>Write description</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="write_annotations">
+                <property name="text">
+                 <string>Write annotaions</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
             <zorder></zorder>
+            <zorder>gridLayoutWidget_2</zorder>
            </widget>
            <widget class="QWidget" name="verbosity">
             <attribute name="title">
              <string>Verbosity</string>
             </attribute>
+            <widget class="QWidget" name="verticalLayoutWidget">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>421</width>
+               <height>591</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QCheckBox" name="quiet_mode">
+                <property name="text">
+                 <string>Quiet mode</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="verbose_mode">
+                <property name="text">
+                 <string>Verbose mode</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="ignore_warnings">
+                <property name="text">
+                 <string>Ignore warnings</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="ignore_errors">
+                <property name="text">
+                 <string>Ignore errors</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="tab">
+            <attribute name="title">
+             <string>Download Options</string>
+            </attribute>
+            <widget class="QWidget" name="gridLayoutWidget_3">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>421</width>
+               <height>591</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="1" column="2">
+               <widget class="QLineEdit" name="num_retries"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_16">
+                <property name="text">
+                 <string>Max download rate:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLineEdit" name="max_download_rate"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_17">
+                <property name="text">
+                 <string># of retries:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLineEdit" name="buffer_size"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_18">
+                <property name="text">
+                 <string>Buffer size:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="no_resize_buffer">
+                <property name="text">
+                 <string>No resize buffer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QCheckBox" name="playlist_reverse">
+                <property name="text">
+                 <string>Playlist reverse</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </widget>
          </item>
@@ -245,7 +567,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>937</width>
+     <width>749</width>
      <height>21</height>
     </rect>
    </property>
@@ -253,7 +575,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSettings"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
