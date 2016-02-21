@@ -46,6 +46,7 @@ class MainWindow(QMainWindow):
         self.argv.clear()
 
     def check_settings(self):
+        # Video selection
         if len(self.ui.age_limit.text()) > 0 and self.is_integer(self.ui.age_limit.text()):
             self.argv.append("--age-limit")
             self.argv.append(self.ui.age_limit.text())
@@ -76,12 +77,24 @@ class MainWindow(QMainWindow):
         if len(self.ui.date_before.text()) > 0 and not len(self.ui.on_date.text()) > 0:
             self.argv.append("--datebefore")
             self.argv.append(self.ui.date_before.text())
+            print("On date field is filled, skipping before date field.")
         if len(self.ui.date_after.text()) > 0 and not len(self.ui.on_date.text()) > 0:
             self.argv.append("--dateafter")
             self.argv.append(self.ui.date_after.text())
-        if len(self.ui.filter.text()) > 0:
-            self.argv.append("--match-filter")
-            self.argv.append(self.ui.filter.text())
+            print("On date field is filled, skipping after date field.")
+        # Filesystem options
+        if self.ui.video_id_name.isChecked():
+            self.argv.append("--id")
+        if self.ui.restrict_filename.isChecked():
+            self.argv.append("--restrict-filenames")
+        if self.ui.no_overwrites.isChecked():
+            self.argv.append("--no-overwrites")
+        if self.ui.write_info_json.isChecked():
+            self.argv.append("--write-info-json")
+        if self.ui.write_description.isChecked():
+            self.argv.append("--write-description")
+        if self.ui.write_annotations.isChecked():
+            self.argv.append("--write-annotations")
 
     def is_integer(self, value):
         try:

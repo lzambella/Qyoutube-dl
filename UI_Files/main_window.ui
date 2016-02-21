@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
+    <width>848</width>
     <height>779</height>
    </rect>
   </property>
@@ -124,7 +124,7 @@
             </sizepolicy>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="video_selection">
             <attribute name="title">
@@ -143,16 +143,6 @@
               <property name="sizeConstraint">
                <enum>QLayout::SetNoConstraint</enum>
               </property>
-              <item row="11" column="3">
-               <widget class="QLineEdit" name="filter">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
               <item row="8" column="1">
                <widget class="QLabel" name="label_10">
                 <property name="text">
@@ -214,16 +204,6 @@
                 </property>
                </widget>
               </item>
-              <item row="11" column="1">
-               <widget class="QLabel" name="label_13">
-                <property name="whatsThis">
-                 <string/>
-                </property>
-                <property name="text">
-                 <string>Filter:</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="3">
                <widget class="QLineEdit" name="min_views">
                 <property name="sizePolicy">
@@ -238,6 +218,13 @@
                <widget class="QLabel" name="label_3">
                 <property name="text">
                  <string>Minimum Views:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Age Limit:</string>
                 </property>
                </widget>
               </item>
@@ -346,10 +333,10 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="label_2">
+              <item row="11" column="1">
+               <widget class="QPushButton" name="filter_button">
                 <property name="text">
-                 <string>Age Limit:</string>
+                 <string>Filter options</string>
                 </property>
                </widget>
               </item>
@@ -373,38 +360,14 @@
               <property name="sizeConstraint">
                <enum>QLayout::SetNoConstraint</enum>
               </property>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="batch_file"/>
-              </item>
-              <item row="3" column="0">
-               <widget class="QCheckBox" name="no_overwrites">
-                <property name="text">
-                 <string>Prevent file overwriting</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
-               <widget class="QLabel" name="label_14">
-                <property name="text">
-                 <string>Batch file:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="select_batch_file">
-                <property name="text">
-                 <string>...</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QCheckBox" name="vide_id_name">
+               <widget class="QCheckBox" name="video_id_name">
                 <property name="text">
                  <string>Use video ID in name</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="0" column="1">
                <widget class="QCheckBox" name="restrict_filename">
                 <property name="text">
                  <string>Restrict names to only ASCII</string>
@@ -412,33 +375,44 @@
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QLabel" name="label_15">
+               <widget class="QCheckBox" name="no_overwrites">
                 <property name="text">
-                 <string>Output template:</string>
+                 <string>Prevent file overwriting</string>
                 </property>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="output_template"/>
-              </item>
-              <item row="3" column="1">
                <widget class="QCheckBox" name="write_info_json">
                 <property name="text">
                  <string>Write to json file</string>
                 </property>
                </widget>
               </item>
-              <item row="4" column="0">
+              <item row="2" column="0">
                <widget class="QCheckBox" name="write_description">
                 <property name="text">
                  <string>Write description</string>
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
+              <item row="2" column="1">
                <widget class="QCheckBox" name="write_annotations">
                 <property name="text">
                  <string>Write annotaions</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QPushButton" name="output_template">
+                <property name="text">
+                 <string>Change output template</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QPushButton" name="load_batch_file">
+                <property name="text">
+                 <string>Load URL list</string>
                 </property>
                </widget>
               </item>
@@ -580,7 +554,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>749</width>
+     <width>848</width>
      <height>21</height>
     </rect>
    </property>
