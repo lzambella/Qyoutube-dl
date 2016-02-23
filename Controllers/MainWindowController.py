@@ -95,6 +95,15 @@ class MainWindow(QMainWindow):
             self.argv.append("--write-description")
         if self.ui.write_annotations.isChecked():
             self.argv.append("--write-annotations")
+        # Verbosity
+        if self.ui.quiet_mode.isChecked():
+            self.argv.append("--quiet")
+        if self.ui.verbose_mode.isChecked() and not self.ui.quiet_mode.isChecked():
+            self.argv.append("--verbose")
+        if self.ui.ignore_warnings.isChecked() and not self.ui.quiet_mode.isChecked():
+            self.argv.append("--ignore-warnings")
+        if self.ui.ignore_errors.isChecked() and not self.ui.quiet_mode.isChecked():
+            self.argv.append("--ignore-errors")
 
     def is_integer(self, value):
         try:

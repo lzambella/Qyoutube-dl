@@ -124,7 +124,7 @@
             </sizepolicy>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="video_selection">
             <attribute name="title">
@@ -418,8 +418,6 @@
               </item>
              </layout>
             </widget>
-            <zorder></zorder>
-            <zorder>gridLayoutWidget_2</zorder>
            </widget>
            <widget class="QWidget" name="verbosity">
             <attribute name="title">
@@ -460,6 +458,58 @@
                <widget class="QCheckBox" name="ignore_errors">
                 <property name="text">
                  <string>Ignore errors</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="progress_bar">
+                <property name="text">
+                 <string>Do not print progress bar</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="http_traffic">
+                <property name="text">
+                 <string>Print HTTP traffic</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="tab_2">
+            <attribute name="title">
+             <string>Subtitle Options</string>
+            </attribute>
+            <widget class="QWidget" name="gridLayoutWidget_4">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>421</width>
+               <height>601</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="write_auto_sub">
+                <property name="text">
+                 <string>Write auto subtitles</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="write_sub">
+                <property name="text">
+                 <string>Write subtitles</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="all_subs">
+                <property name="text">
+                 <string>Write all subtitles</string>
                 </property>
                </widget>
               </item>
