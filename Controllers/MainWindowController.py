@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QDialog
+from PyQt5.QtWidgets import QMainWindow, QDialog, QFileDialog
 from PyQt5.QtCore import pyqtSlot, Qt
 from Compiled_UI.MainWindow import Ui_MainWindow
 from Compiled_UI.about import Ui_About
@@ -30,6 +30,7 @@ class MainWindow(QMainWindow):
             self.ui.url_list.addItem(url)
         self.ui.lineEdit.setText('')
 
+    # Execute the downloader
     @pyqtSlot()
     def on_pushButton_2_pressed(self):
         if self.ui.url_list.count() > 0:
@@ -44,6 +45,13 @@ class MainWindow(QMainWindow):
         else:
             print("ERROR: No URLs were given.")
         self.argv.clear()
+
+    @pyqtSlot()
+    def on_load_batch_file_pressed(self):
+            file = QFileDialog.getOpenFileName()
+            with open(file[0]) as f:
+                lines = f.read().splitlines()
+            self.batch_load(lines)
 
     def check_settings(self):
         # Video selection
@@ -104,6 +112,18 @@ class MainWindow(QMainWindow):
             self.argv.append("--ignore-warnings")
         if self.ui.ignore_errors.isChecked() and not self.ui.quiet_mode.isChecked():
             self.argv.append("--ignore-errors")
+        # Subtitle options
+        if self.ui.write_sub.isChecked():
+            self.argv.append("--write-sub")
+        if self.ui.write_auto_sub.isChecked():
+            self.argv.append("--write-auto-sub")
+        if self.ui.all_subs.isChecked():
+            self.argv.append("--all-subs")
+
+    def batch_load(self, url_list):
+        for x in url_list:
+            if "http://" or "https://" in x:
+                self.ui.url_list.addItem(x)
 
     def is_integer(self, value):
         try:

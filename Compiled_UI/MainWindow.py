@@ -337,6 +337,9 @@ class Ui_MainWindow(object):
         self.pushButton_2.setSizePolicy(sizePolicy)
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout.addWidget(self.pushButton_2)
+        self.clear_list = QtWidgets.QPushButton(self.frame)
+        self.clear_list.setObjectName("clear_list")
+        self.verticalLayout.addWidget(self.clear_list)
         self.gridLayout_2.addWidget(self.frame, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -362,8 +365,11 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.settings_panel.setCurrentIndex(0)
+        self.settings_panel.setCurrentIndex(2)
         self.actionQuit.triggered.connect(MainWindow.close)
+        self.quiet_mode.toggled['bool'].connect(self.verbose_mode.setDisabled)
+        self.quiet_mode.toggled['bool'].connect(self.ignore_warnings.setDisabled)
+        self.quiet_mode.toggled['bool'].connect(self.ignore_errors.setDisabled)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -411,6 +417,7 @@ class Ui_MainWindow(object):
         self.playlist_reverse.setText(_translate("MainWindow", "Playlist reverse"))
         self.settings_panel.setTabText(self.settings_panel.indexOf(self.tab), _translate("MainWindow", "Download Options"))
         self.pushButton_2.setText(_translate("MainWindow", "Download Videos"))
+        self.clear_list.setText(_translate("MainWindow", "Clear List"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))

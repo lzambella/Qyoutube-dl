@@ -124,7 +124,7 @@
             </sizepolicy>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="video_selection">
             <attribute name="title">
@@ -594,6 +594,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="clear_list">
+         <property name="text">
+          <string>Clear List</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
@@ -655,6 +662,54 @@
     <hint type="destinationlabel">
      <x>285</x>
      <y>258</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quiet_mode</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>verbose_mode</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>604</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>604</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quiet_mode</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ignore_warnings</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>604</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>604</x>
+     <y>353</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quiet_mode</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ignore_errors</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>604</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>604</x>
+     <y>441</y>
     </hint>
    </hints>
   </connection>
