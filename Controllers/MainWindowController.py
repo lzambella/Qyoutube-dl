@@ -30,6 +30,10 @@ class MainWindow(QMainWindow):
             self.ui.url_list.addItem(url)
         self.ui.lineEdit.setText('')
 
+    @pyqtSlot()
+    def on_clear_list_pressed(self):
+        self.ui.url_list.clear()
+
     # Execute the downloader
     @pyqtSlot()
     def on_pushButton_2_pressed(self):
@@ -119,10 +123,20 @@ class MainWindow(QMainWindow):
             self.argv.append("--write-auto-sub")
         if self.ui.all_subs.isChecked():
             self.argv.append("--all-subs")
+        # Download options
+        if len(self.ui.max_download_rate.text()) > 0 and self.is_integer(self.ui.max_download_rate.text()):
+            self.argv.append("--rate-limit")
+            self.argv.append(self.ui.max_download_rate.text())
+        if len(self.ui.num_retries.text()) > 0 and self.is_integer(self.ui.num_retries.text()):
+            self.argv.append("--retries")
+            self.argv.append(self.ui.num_retries.text())
+        if len(self.ui.buffer_size.text()) > 0 and self.is_integer(self.ui.buffer_size.text()):
+            self.argv.append("--buffer-size")
+            self.argv.append(self.ui.buffer_size.text())
 
     def batch_load(self, url_list):
         for x in url_list:
-            if "http://" or "https://" in x:
+            if 'http://' in x or 'https://' in x:
                 self.ui.url_list.addItem(x)
 
     def is_integer(self, value):
